@@ -13,10 +13,10 @@ Future<void> main() async {
 
 final key = dotenv.env['API_KEY']!;
 final now = DateTime.now();
-final startOfweek = now.subtract(Duration(days: now.weekday - 1));
-final endOfWeek = now.add(Duration(days: DateTime.daysPerWeek - now.weekday));
-final startOfMonth = DateTime(now.year, now.month, 1);
-final endOfMonth = DateTime(now.year, now.month + 1, 0);
+final startOfWeek = DateFormat('yyyyMMdd').format(now.subtract(Duration(days: now.weekday - 1)));
+final endOfWeek = DateFormat('yyyyMMdd').format(now.add(Duration(days: DateTime.daysPerWeek - now.weekday)));
+final startOfMonth = DateFormat('yyyyMMdd').format(DateTime(now.year, now.month, 1));
+final endOfMonth = DateFormat('yyyyMMdd').format(DateTime(now.year, now.month + 1, 0));
 final year = DateFormat('yyyy').format(now);
 final month = DateFormat('MM').format(now);
 final day = DateFormat('dd').format(now);
@@ -110,7 +110,7 @@ Widget widgetTodayMealInkWell(BuildContext context) {
               child: Column(
                 children: [
                   Text(
-                    '$year년 $month월 $day일 급식',
+                    '$year년 $month월 $day일 급식\n',
                     style: 
                       const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
                   ),
@@ -166,7 +166,7 @@ Widget widgetTodayTimeTableInkWell(BuildContext context) {
               child: Column(
                 children: [
                   Text(
-                    '$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표',
+                    '$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표\n',
                     style: 
                       const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
                   ),
@@ -378,14 +378,14 @@ Future<Map<String, List<String>>> getMonthMeal() async {
   final mealsElement = document.findAllElements('mealServiceDietInfo');
 
   if (mealsElement.isEmpty) {
-    return {"$year년 $month월": ["이번 달 급식 정보가 없어요"]};
+    return {"$year년 $month월\n": ["이번 달 급식 정보가 없어요"]};
   }
 
   Map<String, List<String>> mealsByDate = {};
 
   for (var row in mealsElement.first.findAllElements('row')) {
     String date = row.findElements('MLSV_YMD').first.text;
-    String formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6, 8)}일 급식';
+    String formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6, 8)}일 급식\n';
     String mealContent = Html(data: row.findElements('DDISH_NM').first.text).data ?? '';
 
     if (!mealsByDate.containsKey(formattedDate)) {
@@ -428,7 +428,7 @@ Future<List<String>> getTodayTimeTable() async {
 
 Future<Map<String, List<String>>> getWeekTimeTable() async {
   final response = await http.get(
-    Uri.parse('https://open.neis.go.kr/hub/hisTimetable?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&GRADE=$schoolgrade&CLASS_NM=$schoolclass&TI_FROM_YMD=$startOfweek&TI_TO_YMD=$endOfWeek'),
+    Uri.parse('https://open.neis.go.kr/hub/hisTimetable?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&GRADE=$schoolgrade&CLASS_NM=$schoolclass&TI_FROM_YMD=$startOfWeek&TI_TO_YMD=$endOfWeek'),
   );
 
   final document = xml.XmlDocument.parse(response.body);
@@ -436,7 +436,7 @@ Future<Map<String, List<String>>> getWeekTimeTable() async {
 
   if (timetableElement.isEmpty) {
     return {
-      "$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표": ["이번 주 시간표 정보가 없어요."]
+      "$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표\n": ["이번 주 시간표 정보가 없어요."]
     };
   }
 
@@ -455,7 +455,7 @@ Future<Map<String, List<String>>> getWeekTimeTable() async {
     
     var period = rows[i].findElements('PERIO').first.text;
     var date = rows[i].findElements('ALL_TI_YMD').first.text;
-    var formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6)}일 $schoolgrade학년 $schoolclass반 시간표';
+    var formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6)}일 $schoolgrade학년 $schoolclass반 시간표\n';
 
     if (weeklyTimetable[formattedDate] == null) {
       weeklyTimetable[formattedDate] = [];
