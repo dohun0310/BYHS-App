@@ -2,11 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart' as xml;
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'dart:core';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
+
+final key = dotenv.env['API_KEY']!;
+final now = DateTime.now();
+final startOfweek = now.subtract(Duration(days: now.weekday - 1));
+final endOfWeek = now.add(Duration(days: DateTime.daysPerWeek - now.weekday));
+final startOfMonth = DateTime(now.year, now.month, 1);
+final endOfMonth = DateTime(now.year, now.month + 1, 0);
+final year = DateFormat('yyyy').format(now);
+final month = DateFormat('MM').format(now);
+final day = DateFormat('dd').format(now);
+final schoolgrade = '2';
+final schoolclass = '2';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,26 +37,15 @@ class MyApp extends StatelessWidget {
 }
 
 Widget homeContent(BuildContext context) {
-  return FutureBuilder<List<String>>(
-    future: getEverything(),
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return loadingIndicator();
-      } else if (snapshot.hasError) {
-        return errorWidget();
-      } else if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-        return ListView.builder(
-          itemCount: snapshot.data!.length,
-          itemBuilder: (context, index) {
-            return Html(
-              data: snapshot.data![index],
-            );
-          },
-        );
-      } else {
-        return const Text('No Data');
-      }
-    },
+  return SafeArea(
+    child: Center(
+      child: Column(
+        children: [
+          widgetTodayMealInkWell(),
+          widgetTodayTimeTableInkWell(),
+        ],
+      ),
+    ),
   );
 }
 
@@ -83,18 +87,109 @@ Widget errorWidget() {
   );
 }
 
-Future<List<String>> getEverything() async {
-  final meals = await getTodayMeal();
-  final timetable = await getTimeTable();
-  return meals + timetable;
+Widget widgetTodayMealInkWell() {
+  return Container(
+    margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(16),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Text(
+                '$year년 $month월 $day일 급식',
+                style: 
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+              ),
+              const SizedBox(height: 10),
+              FutureBuilder<List<String>>(
+                future: getTodayMeal(),
+                builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return loadingIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return Html(
+                      data: '''
+                        <div style="text-align: center; font-size: 16px; font-weight: 500;">
+                          ${snapshot.data!.join('<br />')}
+                        </div>
+                      '''
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+  );
+}
+
+Widget widgetTodayTimeTableInkWell() {
+  return Container(
+    margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(16),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Colors.grey[300],
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Text(
+                '$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표',
+                style: 
+                  const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+              ),
+              const SizedBox(height: 10),
+              FutureBuilder<List<String>>(
+                future: getTodayTimeTable(),
+                builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return loadingIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    return Html(
+                      data: '''
+                        <div style="text-align: center; font-size: 16px; font-weight: 500;">
+                          ${snapshot.data!.join('<br />')}
+                        </div>
+                      '''
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    )
+  );
 }
 
 Future<List<String>> getTodayMeal() async {
-  final now = DateTime.now();
-  final today = DateFormat('yyyyMMdd').format(now);
-
   final response = await http.get(
-    Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_YMD=$today'),
+    Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_FROM_YMD=$year$month$day&MLSV_TO_YMD=$year$month$day'),
   );
 
   final document = xml.XmlDocument.parse(response.body);
@@ -115,11 +210,8 @@ Future<List<String>> getTodayMeal() async {
 }
 
 Future<List<String>> getMonthMeal() async {
-  final now = DateTime.now();
-  final month = DateFormat('yyyyMM').format(now);
-
   final response = await http.get(
-    Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_YMD=$month'),
+    Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_FROM_YMD=$startOfMonth&MLSV_TO_YMD=$endOfMonth'),
   );
 
   final document = xml.XmlDocument.parse(response.body);
@@ -139,12 +231,39 @@ Future<List<String>> getMonthMeal() async {
   return meals;
 }
 
-Future<List<String>> getTimeTable() async {
-  final now = DateTime.now();
-  final month = DateFormat('yyyyMM').format(now);
-
+Future<List<String>> getTodayTimeTable() async {
   final response = await http.get(
-    Uri.parse('https://open.neis.go.kr/hub/hisTimetable?ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&ALL_TI_YMD=$month&GRADE=2&CLASS_NM=2'),
+    Uri.parse('https://open.neis.go.kr/hub/hisTimetable?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&GRADE=$schoolgrade&CLASS_NM=$schoolclass&TI_FROM_YMD=$year$month$day&TI_TO_YMD=$year$month$day'),
+  );
+
+  final document = xml.XmlDocument.parse(response.body);
+  final timetableElement = document.findAllElements('hisTimetable');
+
+  if (timetableElement.isEmpty) {
+    return ["오늘의 시간표 정보가 없어요."];
+  }
+
+  String extractLetterOrReturnOriginal(String input) {
+    RegExp regex = RegExp(r'[A-Z]');
+    var match = regex.firstMatch(input);
+    return match != null ? match.group(0) ?? '' : input;
+  }
+
+  List<String> timetable = [];
+  var rows = timetableElement.first.findAllElements('row').toList();
+  for (int i = 0; i < rows.length; i++) {
+      var rawSubject = rows[i].findElements('ITRT_CNTNT').first.text;
+      var subject = extractLetterOrReturnOriginal(rawSubject); 
+      timetable.add('${i + 1}교시: $subject');
+  }
+
+  return timetable;
+}
+
+
+Future<List<String>> getWeekTimeTable() async {
+  final response = await http.get(
+    Uri.parse('https://open.neis.go.kr/hub/hisTimetable?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&GRADE=$schoolgrade&CLASS_NM=$schoolclass&TI_FROM_YMD=$startOfweek&TI_TO_YMD=$endOfWeek'),
   );
 
   final document = xml.XmlDocument.parse(response.body);
@@ -155,11 +274,19 @@ Future<List<String>> getTimeTable() async {
     return ["이번 주 시간표 정보가 없어요."];
   }
 
-  final timetable = timetableElement
-      .first
-      .findAllElements('row')
-      .map((e) => e.findElements('ITRT_CNTNT').first.text)
-      .toList();
+  String extractLetterOrReturnOriginal(String input) {
+    RegExp regex = RegExp(r'[A-Z]');
+    var match = regex.firstMatch(input);
+    return match != null ? match.group(0) ?? '' : input;
+  }
+
+  List<String> timetable = [];
+  var rows = timetableElement.first.findAllElements('row').toList();
+  for (int i = 0; i < rows.length; i++) {
+      var rawSubject = rows[i].findElements('ITRT_CNTNT').first.text;
+      var subject = extractLetterOrReturnOriginal(rawSubject); 
+      timetable.add('${i + 1}교시: $subject');
+  }
 
   return timetable;
 }

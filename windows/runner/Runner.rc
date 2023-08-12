@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "byhsapp" "\0"
+            VALUE "FileDescription", "부용고등학교" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "byhsapp" "\0"
+            VALUE "InternalName", "부용고등학교" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "byhsapp.exe" "\0"
-            VALUE "ProductName", "byhsapp" "\0"
+            VALUE "OriginalFilename", "부용고등학교.exe" "\0"
+            VALUE "ProductName", "부용고등학교" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
