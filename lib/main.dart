@@ -29,7 +29,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: 'NotoSansKR',
+      ),
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          actions: [
+            InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(32),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Icon(Icons.more_vert),
+              ),
+            ),
+          ],
+        ),
         body: homeContent(context),
       ),
     );
@@ -37,14 +55,13 @@ class MyApp extends StatelessWidget {
 }
 
 Widget homeContent(BuildContext context) {
-  return SafeArea(
-    child: Center(
-      child: Column(
-        children: [
-          widgetTodayMealInkWell(context),
-          widgetTodayTimeTableInkWell(context),
-        ],
-      ),
+  return SingleChildScrollView(
+    child: Column(
+      children: [
+        widgetTitle(context),
+        widgetTodayMeal(context),
+        widgetTodayTimeTable(context),
+      ],
     ),
   );
 }
@@ -87,7 +104,42 @@ Widget errorWidget() {
   );
 }
 
-Widget widgetTodayMealInkWell(BuildContext context) {
+Widget widgetTitle(BuildContext context) {
+  return Builder(
+    builder: (BuildContext context) {
+      return Container(
+        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '부용고등학교 $schoolgrade학년 $schoolclass반',
+              style: const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '$month월 $day일',
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            ),
+          ]
+        )
+      );
+    } 
+  );
+}
+
+Widget widgetTodayMeal(BuildContext context) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
@@ -102,39 +154,90 @@ Widget widgetTodayMealInkWell(BuildContext context) {
           borderRadius: BorderRadius.circular(16),
           child: Ink(
             decoration: BoxDecoration(
-              color: Colors.grey[300],
               borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey[300]!),
             ),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  Text(
-                    '$year년 $month월 $day일 급식\n',
-                    style: 
-                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(14),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.restaurant,
+                        size: 20,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        '오늘의 급식',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        )
+                      ),
+                      Spacer(),
+                      Text(
+                        '더보기',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        )
+                      )
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  FutureBuilder<List<String>>(
-                    future: getTodayMeal(),
-                    builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return loadingIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else {
-                        return Html(
-                          data: '''
-                            <div style="text-align: center; font-size: 16px; font-weight: 500;">
-                              ${snapshot.data!.join('<br />')}
-                            </div>
-                          '''
-                        );
-                      }
-                    },
-                  ),
-                ],
-              ),
+                ),
+                FutureBuilder<List<Map<String, String>>>(
+                  future: getTodayMeal(),
+                  builder: (BuildContext context, AsyncSnapshot<List<Map<String, String>>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return loadingIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      var lunchMeal = snapshot.data!.first;
+                      return Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 14),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  '점심',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                const Spacer(),
+                                Text(
+                                  '${lunchMeal["calorie"]} kcal',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 6),
+                            child: Html(
+                              data: '${lunchMeal["meal"]}',
+                              style: {
+                                "body": Style(
+                                  fontSize: FontSize(14.0),
+                                )
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -143,11 +246,11 @@ Widget widgetTodayMealInkWell(BuildContext context) {
   );
 }
 
-Widget widgetTodayTimeTableInkWell(BuildContext context) {
+Widget widgetTodayTimeTable(BuildContext context) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+        margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -158,39 +261,110 @@ Widget widgetTodayTimeTableInkWell(BuildContext context) {
           borderRadius: BorderRadius.circular(16),
           child: Ink(
             decoration: BoxDecoration(
-              color: Colors.grey[300],
               borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.grey[300]!),
             ),
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                children: [
-                  Text(
-                    '$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표\n',
-                    style: 
-                      const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+            child: Column(
+              children: [
+                Container(
+                  margin: const EdgeInsets.all(14),
+                  child: const Row (
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.today,
+                        size: 20,
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        '시간표',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        )
+                      ),
+                      Spacer(),
+                      Text(
+                        '더보기',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        )
+                      ) ,
+                    ]
                   ),
-                  const SizedBox(height: 10),
-                  FutureBuilder<List<String>>(
-                    future: getTodayTimeTable(),
-                    builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return loadingIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else {
-                        return Html(
-                          data: '''
-                            <div style="text-align: center; font-size: 16px; font-weight: 500;">
-                              ${snapshot.data!.join('<br />')}
-                            </div>
-                          '''
+                ),
+                FutureBuilder<List<String>>(
+                  future: getTodayTimeTable(),
+                  builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return loadingIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      if (snapshot.data!.length == 1 && snapshot.data![0] == "오늘의 시간표 정보가 없어요.") {
+                        return Container(
+                          margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[100],
+                            ),
+                            child: Text(
+                              snapshot.data![0],
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            )
+                          ),
                         );
                       }
-                    },
-                  ),
-                ],
-              ),
+
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          var splitText = snapshot.data![index].split(' ');
+                          return Container(
+                            margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                            child: Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[100],
+                              ),
+                              child: RichText(
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: '${splitText[0]} ',
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: splitText[1],
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            )
+                          );
+                        }
+                      );
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         ),
@@ -206,67 +380,84 @@ class MonthMealPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          '급식',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 10),
-            FutureBuilder<Map<String, List<String>>>(
-              future: getMonthMeal(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<Map<String, List<String>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return loadingIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
+        child: FutureBuilder<List<Map<String, String>>>(
+          future: getMonthMeal(),
+          builder: (BuildContext context, AsyncSnapshot<List<Map<String, String>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return loadingIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: snapshot.data!.map((mealEntry) {
                   return Column(
-                    children: snapshot.data!.entries.map((dateEntry) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.grey[300],
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(14),
+                        child: Text(
+                          mealEntry["meal"]!.split(':').first.trim(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16
+                          ),
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        child: Row(
                           children: [
-                            Text(
-                              dateEntry.key,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                              textAlign: TextAlign.center,
+                            const Text(
+                              '점심',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
                             ),
-                            ...dateEntry.value.map((mealContent) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                child: Html(
-                                  data: mealContent,
-                                  style: {
-                                    "body": Style(
-                                      fontSize: FontSize(16),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  },
-                                ),
-                              );
-                            }).toList(),
+                            const Spacer(),
+                            Text(
+                              '${mealEntry["calorie"]!} kcal',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              )
+                            )
                           ],
                         ),
-                      );
-                    }).toList(),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 16, 10),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
+                        ),
+                        child: Html(
+                          data: mealEntry["meal"]!.split(':').last.trim(),
+                          style: {
+                            "body": Style(
+                              fontSize: FontSize(16.0),
+                            ),
+                          },
+                        ),
+                      ),
+                    ],
                   );
-                }
-              },
-            ),
-            const SizedBox(height: 10),
-          ],
+                }).toList(),
+              );
+            }
+          },
         ),
       ),
     );
@@ -280,66 +471,118 @@ class WeekTimeTablePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          '시간표',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 10),
-            FutureBuilder<Map<String, List<String>>>(
-              future: getWeekTimeTable(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<Map<String, List<String>>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return loadingIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else {
-                  return Column(
-                    children: snapshot.data!.entries.map((dateEntry) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.grey[300],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
+          FutureBuilder<Map<String, List<String>>>(
+            future: getWeekTimeTable(),
+            builder: (BuildContext context,
+                AsyncSnapshot<Map<String, List<String>>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return loadingIndicator();
+              } else if (snapshot.hasError) {
+                return Text('Error: ${snapshot.error}');
+              } else {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: snapshot.data!.entries.map((dateEntry) {
+                    if (dateEntry.key == "이번 주 시간표 정보가 없어요.") {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(14),
+                            child: Text(
                               dateEntry.key,
                               style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20),
-                              textAlign: TextAlign.center,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20
+                              ),
                             ),
-                            ...dateEntry.value.map((mealContent) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 2.0),
-                                child: Html(
-                                  data: mealContent,
-                                  style: {
-                                    "body": Style(
-                                      fontSize: FontSize(16),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  },
-                                ),
-                              );
-                            }).toList(),
-                          ],
-                        ),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[100],
+                            ),
+                            child: Text(
+                              dateEntry.value.first,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          )
+                        ],
                       );
-                    }).toList(),
-                  );
-                }
-              },
-            ),
-            const SizedBox(height: 10),
+                    }
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(14),
+                          child: Text(
+                            dateEntry.key,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20
+                            ),
+                          )
+                        ),
+                        ...dateEntry.value.map((timeTableEntry) {
+                          List<String> parts = timeTableEntry.split(' ');
+                          return Container(
+                            width: double.infinity,
+                            margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.grey[100],
+                            ),
+                            child: RichText(
+                              textAlign: TextAlign.start,
+                              text: TextSpan(
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: '${parts[0]} ',
+                                    style: const TextStyle(
+                                      color: Colors.grey
+                                    )
+                                  ),
+                                  TextSpan(
+                                    text: parts.sublist(1).join(' ')
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ],
+                    );
+                  }).toList(),
+                );
+              }
+            },
+          ),
           ],
         ),
       ),
@@ -347,7 +590,7 @@ class WeekTimeTablePage extends StatelessWidget {
   }
 }
 
-Future<List<String>> getTodayMeal() async {
+Future<List<Map<String, String>>> getTodayMeal() async {
   final response = await http.get(
     Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_FROM_YMD=$year$month$day&MLSV_TO_YMD=$year$month$day'),
   );
@@ -357,44 +600,51 @@ Future<List<String>> getTodayMeal() async {
   final mealsElement = document.findAllElements('mealServiceDietInfo');
   
   if (mealsElement.isEmpty) {
-    return ["오늘의 급식 정보가 없어요."];
+    return [{"meal": "오늘의 급식 정보가 없어요.", "calorie": ""}];
   }
 
   final meals = mealsElement
       .first
       .findAllElements('row')
-      .map((e) => e.findElements('DDISH_NM').first.text)
+      .map((e) => {
+        "meal": e.findElements('DDISH_NM').first.text,
+        "calorie": e.findElements('MLSV_FGR').first.text
+      })
       .toList();
 
   return meals;
 }
 
-Future<Map<String, List<String>>> getMonthMeal() async {
+Future<List<Map<String, String>>> getMonthMeal() async {
   final response = await http.get(
     Uri.parse('https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=$key&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530575&MLSV_FROM_YMD=$startOfMonth&MLSV_TO_YMD=$endOfMonth')
   );
 
   final document = xml.XmlDocument.parse(response.body);
+
   final mealsElement = document.findAllElements('mealServiceDietInfo');
 
   if (mealsElement.isEmpty) {
-    return {"$year년 $month월\n": ["이번 달 급식 정보가 없어요"]};
+    return [{"meal": "이번 달 급식 정보가 없어요", "calorie": ""}];
   }
 
-  Map<String, List<String>> mealsByDate = {};
+  final meals = mealsElement
+      .first
+      .findAllElements('row')
+      .map((e) {
+        String date = e.findElements('MLSV_YMD').first.text;
+        String formattedDate = '${date.substring(4, 6)}월 ${date.substring(6, 8)}일';
+        String mealContent = e.findElements('DDISH_NM').first.text;
+        String calorie = e.findElements('MLSV_FGR').first.text;
 
-  for (var row in mealsElement.first.findAllElements('row')) {
-    String date = row.findElements('MLSV_YMD').first.text;
-    String formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6, 8)}일 급식\n';
-    String mealContent = Html(data: row.findElements('DDISH_NM').first.text).data ?? '';
+        return {
+          "meal": "$formattedDate: $mealContent",
+          "calorie": calorie
+        };
+      })
+      .toList();
 
-    if (!mealsByDate.containsKey(formattedDate)) {
-      mealsByDate[formattedDate] = [];
-    }
-    mealsByDate[formattedDate]!.add(mealContent);
-  }
-
-  return mealsByDate;
+  return meals;
 }
 
 Future<List<String>> getTodayTimeTable() async {
@@ -403,11 +653,8 @@ Future<List<String>> getTodayTimeTable() async {
   );
 
   final document = xml.XmlDocument.parse(response.body);
-  final timetableElement = document.findAllElements('hisTimetable');
 
-  if (timetableElement.isEmpty) {
-    return ["오늘의 시간표 정보가 없어요."];
-  }
+  final timetableElement = document.findAllElements('hisTimetable');
 
   String extractLetterOrReturnOriginal(String input) {
     RegExp regex = RegExp(r'[A-Z]');
@@ -415,12 +662,16 @@ Future<List<String>> getTodayTimeTable() async {
     return match != null ? match.group(0) ?? '' : input;
   }
 
+  if (timetableElement.isEmpty) {
+    return ["오늘의 시간표 정보가 없어요."];
+  }
+
   List<String> timetable = [];
   var rows = timetableElement.first.findAllElements('row').toList();
   for (int i = 0; i < rows.length; i++) {
       var rawSubject = rows[i].findElements('ITRT_CNTNT').first.text;
       var subject = extractLetterOrReturnOriginal(rawSubject); 
-      timetable.add('${i + 1}교시: $subject');
+      timetable.add('${i + 1} $subject');
   }
 
   return timetable;
@@ -432,12 +683,11 @@ Future<Map<String, List<String>>> getWeekTimeTable() async {
   );
 
   final document = xml.XmlDocument.parse(response.body);
+
   final timetableElement = document.findAllElements('hisTimetable');
 
   if (timetableElement.isEmpty) {
-    return {
-      "$year년 $month월 $day일 $schoolgrade학년 $schoolclass반 시간표\n": ["이번 주 시간표 정보가 없어요."]
-    };
+    return {"이번 주 시간표 정보가 없어요.": ["이번 주 시간표 정보가 없어요."]};
   }
 
   String extractLetterOrReturnOriginal(String input) {
@@ -446,7 +696,7 @@ Future<Map<String, List<String>>> getWeekTimeTable() async {
     return match != null ? match.group(0) ?? '' : input;
   }
 
-  Map<String, List<String>> weeklyTimetable = {};
+  Map<String, List<String>> timetable = {};
 
   var rows = timetableElement.first.findAllElements('row').toList();
   for (int i = 0; i < rows.length; i++) {
@@ -455,13 +705,13 @@ Future<Map<String, List<String>>> getWeekTimeTable() async {
     
     var period = rows[i].findElements('PERIO').first.text;
     var date = rows[i].findElements('ALL_TI_YMD').first.text;
-    var formattedDate = '${date.substring(0, 4)}년 ${date.substring(4, 6)}월 ${date.substring(6)}일 $schoolgrade학년 $schoolclass반 시간표\n';
+    var formattedDate = '${date.substring(4, 6)}월 ${date.substring(6)}일';
 
-    if (weeklyTimetable[formattedDate] == null) {
-      weeklyTimetable[formattedDate] = [];
+    if (timetable[formattedDate] == null) {
+      timetable[formattedDate] = [];
     }
-    weeklyTimetable[formattedDate]?.add('$period교시: $subject');
+    timetable[formattedDate]?.add('$period $subject');
   }
 
-  return weeklyTimetable;
+  return timetable;
 }
