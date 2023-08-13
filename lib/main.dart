@@ -70,7 +70,7 @@ Widget loadingIndicator() {
   return const CircularProgressIndicator();
 }
 
-Widget errorWidget() {
+Widget widgetError() {
   return Center(
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -194,7 +194,7 @@ Widget widgetTodayMeal(BuildContext context) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return loadingIndicator();
                     } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
+                      return widgetError();
                     } else {
                       var lunchMeal = snapshot.data!.first;
                       return Column(
@@ -301,7 +301,7 @@ Widget widgetTodayTimeTable(BuildContext context) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return loadingIndicator();
                     } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
+                      return widgetError();
                     } else {
                       if (snapshot.data!.length == 1 && snapshot.data![0] == "오늘의 시간표 정보가 없어요.") {
                         return Container(
@@ -398,7 +398,7 @@ class MonthMealPage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return loadingIndicator();
             } else if (snapshot.hasError) {
-              return Text('Error: ${snapshot.error}');
+              return widgetError();
             } else {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -493,7 +493,7 @@ class WeekTimeTablePage extends StatelessWidget {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return loadingIndicator();
               } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
+                return widgetError();
               } else {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
