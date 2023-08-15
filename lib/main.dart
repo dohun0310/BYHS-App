@@ -55,13 +55,67 @@ class MyApp extends StatelessWidget {
 }
 
 Widget homeContent(BuildContext context) {
+  final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+  final isTablet = MediaQuery.of(context).size.shortestSide >= 600;
+
+  if (isTablet || isLandscape) {
+    return tabletLayout(context);
+  } else {
+    return mobileLayout(context);
+  }
+}
+
+Widget mobileLayout(BuildContext context) {
   return SingleChildScrollView(
-    child: Column(
-      children: [
-        widgetTitle(context),
-        widgetTodayMeal(context),
-        widgetTodayTimeTable(context),
-      ],
+    child: Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 10, bottom: 16),
+            child:widgetTitle(context)
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: widgetTodayMeal(context)
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: widgetTodayTimeTable(context)
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget tabletLayout(BuildContext context) {
+  return SingleChildScrollView(
+    child: Container(
+      margin: const EdgeInsets.symmetric(horizontal: 64),
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 10, bottom: 16),
+            child: widgetTitle(context)
+          ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: widgetTodayMeal(context)
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: widgetTodayTimeTable(context)
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }
@@ -109,7 +163,6 @@ Widget widgetTitle(BuildContext context) {
     builder: (BuildContext context) {
       return Container(
         width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -143,7 +196,6 @@ Widget widgetTodayMeal(BuildContext context) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
-        margin: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -250,7 +302,6 @@ Widget widgetTodayTimeTable(BuildContext context) {
   return Builder(
     builder: (BuildContext context) {
       return Container(
-        margin: const EdgeInsets.fromLTRB(20, 0, 20, 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -486,19 +537,50 @@ class WeekTimeTablePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-          FutureBuilder<Map<String, List<String>>>(
-            future: getWeekTimeTable(),
-            builder: (BuildContext context,
-                AsyncSnapshot<Map<String, List<String>>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return loadingIndicator();
-              } else if (snapshot.hasError) {
-                return widgetError();
-              } else {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: snapshot.data!.entries.map((dateEntry) {
-                    if (dateEntry.key == "이번 주 시간표 정보가 없어요.") {
+            FutureBuilder<Map<String, List<String>>>(
+              future: getWeekTimeTable(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<Map<String, List<String>>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return loadingIndicator();
+                } else if (snapshot.hasError) {
+                  return widgetError();
+                } else {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: snapshot.data!.entries.map((dateEntry) {
+                      if (dateEntry.key == "이번 주 시간표 정보가 없어요.") {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(14),
+                              child: Text(
+                                dateEntry.key,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[100],
+                              ),
+                              child: Text(
+                                dateEntry.value.first,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -507,82 +589,52 @@ class WeekTimeTablePage extends StatelessWidget {
                             child: Text(
                               dateEntry.key,
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20
-                              ),
-                            ),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20),
+                            )
                           ),
-                          Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.grey[100],
-                            ),
-                            child: Text(
-                              dateEntry.value.first,
-                              style: const TextStyle(
-                                fontSize: 16,
+                          ...dateEntry.value.map((timeTableEntry) {
+                            List<String> parts = timeTableEntry.split(' ');
+                            return Container(
+                              width: double.infinity,
+                              margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: Colors.grey[100],
                               ),
-                            ),
+                              child: RichText(
+                                textAlign: TextAlign.start,
+                                text: TextSpan(
+                                  style: const TextStyle(
+                                      fontSize: 16, color: Colors.black),
+                                  children: [
+                                    TextSpan(
+                                        text: '${parts[0]} ',
+                                        style: const TextStyle(
+                                            color: Colors.grey)),
+                                    TextSpan(
+                                      text: parts.sublist(1).join(' '),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.grey[300]!),
+                              ),
+                            )
                           )
                         ],
                       );
-                    }
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(14),
-                          child: Text(
-                            dateEntry.key,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20
-                            ),
-                          )
-                        ),
-                        ...dateEntry.value.map((timeTableEntry) {
-                          List<String> parts = timeTableEntry.split(' ');
-                          return Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.fromLTRB(14, 0, 14, 16),
-                            padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: Colors.grey[100],
-                            ),
-                            child: RichText(
-                              textAlign: TextAlign.start,
-                              text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: '${parts[0]} ',
-                                    style: const TextStyle(
-                                      color: Colors.grey
-                                    )
-                                  ),
-                                  TextSpan(
-                                    text: parts.sublist(1).join(' ')
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ],
-                    );
-                  }).toList(),
-                );
-              }
-            },
-          ),
+                    }).toList(),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
