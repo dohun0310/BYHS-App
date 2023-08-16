@@ -71,18 +71,18 @@ class SettingPageState extends State {
           ),
           actions: [
             TextButton(
+              child: const Text('취소'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
               child: const Text('저장'),
               onPressed: () {
                 setState(() {
                     classSetting = "${UserData.instance.schoolgrade}학년 ${UserData.instance.schoolclass}반";
                     saveClassSetting();
                 });
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('취소'),
-              onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
