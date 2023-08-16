@@ -41,9 +41,9 @@ class WeekTimeTablePage extends StatelessWidget {
               builder: (BuildContext context,
                   AsyncSnapshot<Map<String, List<String>>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return loadingIndicator();
+                  return const LoadingIndicator();
                 } else if (snapshot.hasError) {
-                  return widgetError();
+                  return const WidgetError();
                 } else {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

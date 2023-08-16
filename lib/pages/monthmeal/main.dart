@@ -37,9 +37,9 @@ class MonthMealPage extends StatelessWidget {
           future: getMonthMeal(),
           builder: (BuildContext context, AsyncSnapshot<List<Map<String, String>>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return loadingIndicator();
+              return const LoadingIndicator();
             } else if (snapshot.hasError) {
-              return widgetError();
+              return const WidgetError();
             } else {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

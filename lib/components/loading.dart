@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
-Widget loadingIndicator() {
-  return const CircularProgressIndicator();
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const CircularProgressIndicator();
+  }
 }

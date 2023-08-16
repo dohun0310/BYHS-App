@@ -21,9 +21,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'NotoSansKR',
       ),
-      home: Scaffold(
-        appBar: const CustomAppBar(),
-        body: homeContent(context),
+      home: const Scaffold(
+        appBar: CustomAppBar(),
+        body: HomeContent(),
       ),
     );
   }

@@ -67,9 +67,9 @@ Widget widgetTodayTimeTable(BuildContext context) {
                   future: getTodayTimeTable(),
                   builder: (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return loadingIndicator();
+                      return const LoadingIndicator();
                     } else if (snapshot.hasError) {
-                      return widgetError();
+                      return const WidgetError();
                     } else {
                       if (snapshot.data!.length == 1 && snapshot.data![0] == "오늘의 시간표 정보가 없어요.") {
                         return Container(
