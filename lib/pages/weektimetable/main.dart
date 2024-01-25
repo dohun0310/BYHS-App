@@ -29,7 +29,7 @@ class WeekTimeTablePage extends StatelessWidget {
           ),
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFFFFFFFF),
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
