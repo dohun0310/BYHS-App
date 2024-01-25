@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/pages/main/main.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        fontFamily: 'NotoSansKR',
+        fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
       home: const Scaffold(
         appBar: CustomAppBar(),
