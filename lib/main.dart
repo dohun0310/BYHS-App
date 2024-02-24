@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:byhsapp/theme.dart';
 
 import 'package:byhsapp/pages/main/main.dart';
 import 'package:byhsapp/pages/setting/user_data.dart';
@@ -18,9 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: GoogleFonts.notoSans().fontFamily,
-      ),
+      themeMode: ThemeMode.system,
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
       home: const MainPage(),
     );
   }
