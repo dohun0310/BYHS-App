@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/pages/main/main.dart';
 import 'package:byhsapp/pages/setting/user_data.dart';
 
@@ -22,10 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.notoSans().fontFamily,
       ),
-      home: const Scaffold(
-        appBar: CustomAppBar(),
-        body: HomeContent(),
-      ),
+      home: const MainPage(),
     );
   }
 }
