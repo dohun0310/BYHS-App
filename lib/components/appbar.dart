@@ -2,6 +2,64 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/pages/setting/main.dart';
 
+class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MainAppBar({
+    super.key,
+    required this.rightIcon,
+    required this.title,
+    required this.date,
+  });
+
+  final Widget rightIcon;
+  final String title;
+  final String date;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 0.0,
+      actions: [
+        IconButton(
+          icon: rightIcon,
+          onPressed: () {},
+        ),
+      ],
+      flexibleSpace: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16, top: 64),
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16),
+              child: Text(
+                date,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(130.0);
+}
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
@@ -29,4 +87,3 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
