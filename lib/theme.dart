@@ -775,30 +775,30 @@ class ThemeTexts {
   );
 
   static const TextStyle subheadlineRegular = TextStyle(
-    fontSize: 15,
-    height: 20 / 15,
+    fontSize: 14,
+    height: 19 / 14,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
   );
 
   static const TextStyle subheadlineEmphasized = TextStyle(
-    fontSize: 15,
-    height: 20 / 15,
+    fontSize: 14,
+    height: 19 / 14,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
   );
 
   static const TextStyle subheadlineItalic = TextStyle(
-    fontSize: 15,
-    height: 20 / 15,
+    fontSize: 14,
+    height: 19 / 14,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
   );
 
   static const TextStyle subheadlineEmphasizedItalic = TextStyle(
-    fontSize: 15,
-    height: 20 / 15,
+    fontSize: 14,
+    height: 19 / 14,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
