@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:byhsapp/theme.dart';
+
 import 'package:byhsapp/pages/setting/main.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -18,6 +20,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0.0,
+      scrolledUnderElevation: 0,
+      backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
       actions: [
         IconButton(
           icon: rightIcon,
