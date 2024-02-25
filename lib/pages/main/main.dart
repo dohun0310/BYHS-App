@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
@@ -8,6 +9,10 @@ import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
 import 'package:byhsapp/pages/weektimetable/main.dart';
 
+final month = DateFormat("M").format(DateTime.now());
+final day = DateFormat("d").format(DateTime.now());
+final weekday = DateFormat("EEEE", "ko").format(DateTime.now());
+
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -15,9 +20,9 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
-        rightIcon: Icon(Icons.more_vert),
-        destinationPage: SettingPage(),
-        date: "1월 1일 월요일",
+        rightIcon: const Icon(Icons.more_vert),
+        destinationPage: const SettingPage(),
+        date: "$month월 $day일 $weekday",
       ),
       body: SafeArea(
         child: SingleChildScrollView(
