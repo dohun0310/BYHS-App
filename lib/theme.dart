@@ -672,15 +672,15 @@ class ThemeTexts {
   );
 
   static const TextStyle title2Regular = TextStyle(
-    fontSize: 22,
-    height: 28 / 22,
+    fontSize: 24,
+    height: 30 / 24,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
   );
 
   static const TextStyle title2Emphasized = TextStyle(
-    fontSize: 22,
-    height: 28 / 22,
+    fontSize: 24,
+    height: 30 / 24,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.4,
   );
@@ -700,15 +700,15 @@ class ThemeTexts {
   );
 
   static const TextStyle headlineRegular = TextStyle(
-    fontSize: 17,
-    height: 22 / 17,
+    fontSize: 18,
+    height: 23 / 18,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
   );
 
   static const TextStyle headlineItalic = TextStyle(
-    fontSize: 17,
-    height: 22 / 17,
+    fontSize: 18,
+    height: 23 / 18,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
