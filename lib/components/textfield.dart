@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:byhsapp/theme.dart';
 
@@ -6,9 +7,13 @@ class CustomTextField extends StatefulWidget {
   const CustomTextField({
     super.key,
     required this.fieldText,
+    required this.minVal,
+    required this.maxVal,
   });
 
   final String fieldText;
+  final int minVal;
+  final int maxVal;
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();
@@ -69,7 +74,28 @@ class CustomTextFieldState extends State<CustomTextField> {
             ),
           ),
         ),
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          ValueInputFormatter(minVal: widget.minVal, maxVal: widget.maxVal)
+        ],
       )
     );
+  }
+}
+
+class ValueInputFormatter extends TextInputFormatter {
+  final int maxVal;
+  final int minVal;
+  ValueInputFormatter({required this.maxVal, required this.minVal});
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isNotEmpty) {
+      final int value = int.parse(newValue.text);
+      if (value > maxVal || value < minVal) {
+        return oldValue;
+      }
+    }
+    return newValue;
   }
 }
