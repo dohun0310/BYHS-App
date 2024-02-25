@@ -686,15 +686,15 @@ class ThemeTexts {
   );
 
   static const TextStyle title3Regular = TextStyle(
-    fontSize: 20,
-    height: 25 / 20,
+    fontSize: 22,
+    height: 27 / 22,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
   );
 
   static const TextStyle title3Emphasized = TextStyle(
-    fontSize: 20,
-    height: 25 / 20,
+    fontSize: 22,
+    height: 27 / 22,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
   );
