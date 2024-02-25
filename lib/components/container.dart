@@ -30,10 +30,12 @@ class MealContainer extends StatelessWidget {
     super.key,
     required this.calorie,
     required this.dish,
+    this.border = 1,
   });
 
   final String calorie;
   final String dish;
+  final double border;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class MealContainer extends StatelessWidget {
             border: Border(
               bottom: BorderSide(
                 color: Theme.of(context).extension<AppExtension>()!.colors.outline,
-                width: 1
+                width: border
               )
             )
           ),
