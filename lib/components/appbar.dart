@@ -71,16 +71,16 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: Tooltip(
-        message: "뒤로 가기",
-        child: IconButton(
-          icon: const Icon(Icons.arrow_back),
+      leading: (
+        IconButton(
+          icon: const Icon(Icons.arrow_back, size: 24.0),
           onPressed: () { Navigator.pop(context); },
         )
       ),
+      titleSpacing: 0,
       title: Text(
         title,
-        style: ThemeTexts.headlineRegular.copyWith(
+        style: ThemeTexts.title2Emphasized.copyWith(
           color: Theme.of(context).extension<AppExtension>()!.colors.text,
         ),
       ),
@@ -88,6 +88,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0.0,
       scrolledUnderElevation: 0,
       backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
+      toolbarHeight: 64,
     );
   }
 
