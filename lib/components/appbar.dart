@@ -64,19 +64,19 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PageAppBar({
     super.key,
     this.title = "",
+    this.leading = true,
   });
 
   final String title;
+  final bool leading;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: (
-        IconButton(
-          icon: const Icon(Icons.arrow_back, size: 24.0),
-          onPressed: () { Navigator.pop(context); },
-        )
-      ),
+      leading: leading ? IconButton(
+        icon: const Icon(Icons.arrow_back, size: 24.0),
+        onPressed: () { Navigator.pop(context); },
+      ) : null,
       titleSpacing: 0,
       title: Text(
         title,
