@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StudentData {
-  StudentData._privateConstructor();
+class Studentdata {
+  Studentdata._privateConstructor();
   
-  static final StudentData instance = StudentData._privateConstructor();
+  static final Studentdata instance = Studentdata._privateConstructor();
 
   int? grade;
   int? classNumber;
