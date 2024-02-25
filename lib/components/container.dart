@@ -28,12 +28,10 @@ class DateContainer extends StatelessWidget {
 class MealContainer extends StatelessWidget {
   const MealContainer({
     super.key,
-    required this.date,
     required this.calorie,
     required this.dish,
   });
-
-  final String date;
+  
   final String calorie;
   final String dish;
 
@@ -92,7 +90,7 @@ class TimeTableContainer extends StatelessWidget {
     required this.period,
     required this.subject,
   });
-  
+
   final List period;
   final List subject;
 
