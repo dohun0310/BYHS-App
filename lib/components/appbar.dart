@@ -59,7 +59,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(130.0);
 }
 
-class PageAppBar extends StatelessWidget {
+class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PageAppBar({
     super.key,
     required this.title,
@@ -81,4 +81,7 @@ class PageAppBar extends StatelessWidget {
       backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(64.0);
 }
