@@ -90,12 +90,10 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                       icon: Icons.arrow_forward,
                       onPressed: isButtonEnabled ? () async {
                         await saveData();
-                        if (mounted) {
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => const MainPage()),
-                            (Route<dynamic> route) => false,
-                          );
-                        }
+                        Navigator.of(mounted as BuildContext).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (mounted) => const MainPage()),
+                          (Route<dynamic> route) => false,
+                        );
                       } : null,
                     )
                   )
