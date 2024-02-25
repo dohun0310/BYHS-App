@@ -1,33 +1,47 @@
 import 'package:flutter/material.dart';
 
+import 'package:byhsapp/theme.dart';
+
+import 'package:byhsapp/components/appbar.dart';
+
 class InfoPage extends StatelessWidget {
   const InfoPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "정보",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
+      appBar: const PageAppBar(title: "정보"),
+      body: SafeArea(
+        child: Container(
+          alignment: AlignmentDirectional.center,
+          padding: const EdgeInsets.only(left: 16, top: 20, right: 16, bottom: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "부용고등학교",
+                style: ThemeTexts.title2Emphasized.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "d3h1 제작",
+                style: ThemeTexts.calloutRegular.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "버전 1.0.0",
+                style: ThemeTexts.calloutRegular.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+                ),
+              ),
+            ],
+          )
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('부용고등학교 공식 앱'),
-            Text('버전: 1.0.0'),
-            Text('제작자: 김도훈(06)')
-          ],
-        )
-      ),
+      )
     );
   }
 }
