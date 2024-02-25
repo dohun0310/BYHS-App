@@ -11,7 +11,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final Widget rightIcon;
-  final String title;
+  final FutureBuilder<List<int?>> title;
   final String date;
 
   @override
@@ -34,12 +34,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16, top: 64, bottom: 8),
-              child: Text(
-                title,
-                style: ThemeTexts.title2Emphasized.copyWith(
-                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
-                ),
-              ),
+              child: title,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 16),
