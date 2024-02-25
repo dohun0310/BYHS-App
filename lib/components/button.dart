@@ -78,14 +78,14 @@ class FloatingButton extends StatelessWidget {
     super.key,
     this.title,
     this.icon,
-    required this.onPressed,
     this.extended = false,
+    required this.onPressed,
   });
 
   final String? title;
   final IconData? icon;
-  final void Function() onPressed;
   final bool extended;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
