@@ -56,6 +56,7 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextField(
+        controller: controller,
         focusNode: focusNode,
         cursorColor: Theme.of(context).extension<AppExtension>()!.colors.text,
         keyboardType: TextInputType.number,
