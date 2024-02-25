@@ -58,3 +58,27 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(130.0);
 }
+
+class PageAppBar extends StatelessWidget {
+  const PageAppBar({
+    super.key,
+    required this.title,
+  });
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(
+        title,
+        style: ThemeTexts.headlineRegular.copyWith(
+          color: Theme.of(context).extension<AppExtension>()!.colors.text,
+        ),
+      ),
+      elevation: 0.0,
+      scrolledUnderElevation: 0,
+      backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
+    );
+  }
+}
