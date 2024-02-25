@@ -63,7 +63,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PageAppBar({
     super.key,
-    required this.title,
+    this.title = "",
   });
 
   final String title;
