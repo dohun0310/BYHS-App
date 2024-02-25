@@ -121,3 +121,43 @@ class FloatingButton extends StatelessWidget {
     );
   }
 }
+
+class ListButton extends StatelessWidget {
+  const ListButton({
+    super.key,
+    required this.title,
+    this.value,
+    required this.destinationPage,
+  });
+
+  final String title;
+  final FutureBuilder? value;
+  final Widget destinationPage;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => destinationPage),
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: ThemeTexts.calloutRegular.copyWith(
+                color: Theme.of(context).extension<AppExtension>()!.colors.text,
+              ),
+            ),
+            value ?? const SizedBox(),
+          ]
+        )
+      )
+    );
+  }
+}
