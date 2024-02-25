@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:byhsapp/theme.dart';
 
@@ -8,11 +9,23 @@ import 'package:byhsapp/components/textfield.dart';
 
 import 'package:byhsapp/pages/main/main.dart';
 
-class StudentInfoPage extends StatelessWidget {
+
+class StudentInfoPage extends StatefulWidget {
   const StudentInfoPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  StudentInfoPageState createState() => StudentInfoPageState();
+}
+
+class StudentInfoPageState extends State<StudentInfoPage> {
+  Future<void> completeOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    late bool onboardingComplete = prefs.getBool("onboardingComplete") ?? false;
+    await prefs.setBool("onboardingComplete", true);
+  }
+
+  @override
+    Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -53,11 +66,15 @@ class StudentInfoPage extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     child: FloatingButton(
                       icon: Icons.arrow_forward,
-                      onPressed: () {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const MainPage()),
-                          (Route<dynamic> route) => false,
-                        );
+                      onPressed: () async {
+                        await completeOnboarding();
+
+                        if (mounted) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => const MainPage()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
                       },
                     )
                   )
