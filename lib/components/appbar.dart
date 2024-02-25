@@ -70,6 +70,13 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: Tooltip(
+        message: "뒤로 가기",
+        child: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () { Navigator.pop(context); },
+        )
+      ),
       title: Text(
         title,
         style: ThemeTexts.headlineRegular.copyWith(
