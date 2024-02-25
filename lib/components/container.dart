@@ -31,7 +31,7 @@ class MealContainer extends StatelessWidget {
     required this.calorie,
     required this.dish,
   });
-  
+
   final String calorie;
   final String dish;
 
@@ -89,10 +89,12 @@ class TimeTableContainer extends StatelessWidget {
     super.key,
     required this.period,
     required this.subject,
+    required this.border,
   });
 
   final List period;
   final List subject;
+  final double border;
 
   @override
   Widget build(BuildContext context) {
@@ -102,9 +104,9 @@ class TimeTableContainer extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: Theme.of(context).extension<AppExtension>()!.colors.outline,
-            width: 1,
-          ),
-        ),
+            width: border
+          )
+        )
       ),
       child: ListView.builder(
         physics: const NeverScrollableScrollPhysics(),
