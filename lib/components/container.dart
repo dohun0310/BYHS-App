@@ -89,7 +89,7 @@ class TimeTableContainer extends StatelessWidget {
     super.key,
     required this.period,
     required this.subject,
-    required this.border,
+    this.border = 1,
   });
 
   final List period;
