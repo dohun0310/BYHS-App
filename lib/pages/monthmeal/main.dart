@@ -6,6 +6,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'dart:core';
 
+import 'package:byhsapp/theme.dart';
+
+import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/error.dart';
 import 'package:byhsapp/components/loading.dart';
 
@@ -20,17 +23,8 @@ class MonthMealPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          '급식',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.black),
+      appBar: const PageAppBar(
+        title: "급식"
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<List<Map<String, String>>>(
