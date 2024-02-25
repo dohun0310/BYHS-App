@@ -91,12 +91,12 @@ class TimeTableContainer extends StatelessWidget {
     super.key,
     required this.period,
     required this.subject,
-    this.border = 1,
+    this.border = true,
   });
 
   final List period;
   final List subject;
-  final double border;
+  final bool border;
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +105,8 @@ class TimeTableContainer extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
-            color: Theme.of(context).extension<AppExtension>()!.colors.outline,
-            width: border
+            color: border ? Theme.of(context).extension<AppExtension>()!.colors.outline : Colors.transparent,
+            width: 1
           )
         )
       ),
