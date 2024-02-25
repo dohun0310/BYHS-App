@@ -11,7 +11,7 @@ void main() async {
   await dotenv.load(fileName: ".env");
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final onboardingComplete = prefs.getBool('onboardingComplete') ?? false;
+  final onboardingComplete = prefs.getBool("onboardingComplete") ?? false;
 
   runApp(MyApp(onboardingComplete: onboardingComplete));
 }

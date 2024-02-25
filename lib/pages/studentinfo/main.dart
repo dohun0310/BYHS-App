@@ -18,8 +18,15 @@ class StudentInfoPage extends StatefulWidget {
 }
 
 class StudentInfoPageState extends State<StudentInfoPage> {
-  Future<void> completeOnboarding() async {
+  int? grade;
+  int? classNumber;
+
+  bool get isButtonEnabled => grade != null && classNumber != null;
+
+  Future<void> saveData() async {
     final prefs = await SharedPreferences.getInstance();
+    if (grade != null) await prefs.setInt("grade", grade!);
+    if (classNumber != null) await prefs.setInt("classNumber", classNumber!);
     await prefs.setBool("onboardingComplete", true);
   }
 
@@ -48,18 +55,28 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                       ),
                     ),
                     const SizedBox(height: 36),
-                    const Row(
+                    Row(
                       children: [
                         CustomTextField(
                           fieldText: "학년",
                           minVal: 1,
-                          maxVal: 3
+                          maxVal: 3,
+                          onTextChanged: (value) {
+                            setState(() {
+                              grade = int.tryParse(value);
+                            });
+                          }
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         CustomTextField(
                           fieldText: "반",
                           minVal: 1,
-                          maxVal: 12
+                          maxVal: 12,
+                          onTextChanged: (value) {
+                            setState(() {
+                              classNumber = int.tryParse(value);
+                            });
+                          },
                         ),
                       ] 
                     ),
@@ -67,18 +84,20 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: FloatingButton(
-                    icon: Icons.arrow_forward,
-                    onPressed: () async {
-                      await completeOnboarding();
-
-                      if (mounted) {
-                        Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (context) => const MainPage()),
-                          (Route<dynamic> route) => false,
-                        );
-                      }
-                    },
+                  child: Opacity(
+                    opacity: isButtonEnabled ? 1.0 : 0.4,
+                    child: FloatingButton(
+                      icon: Icons.arrow_forward,
+                      onPressed: isButtonEnabled ? () async {
+                        await saveData();
+                        if (mounted) {
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => const MainPage()),
+                            (Route<dynamic> route) => false,
+                          );
+                        }
+                      } : null,
+                    )
                   )
                 )
               ],
