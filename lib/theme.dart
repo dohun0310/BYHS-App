@@ -328,10 +328,10 @@ class AppExtension extends ThemeExtension<AppExtension> {
   );
 
   ThemeColors get colors => ThemeColors(
-    background: grey10,
+    background: brightness == Brightness.light ? const Color(0xFFFFFFFF) : grey10,
     text: grey90,
-    textSecondary: grey70,
-    container: brightness == Brightness.light ? grey40 : grey20,
+    textSecondary: grey60,
+    container: brightness == Brightness.light ? grey10 : grey20,
     containerSecondary: brightness == Brightness.light ? grey50 : grey30,
     correct: brightness == Brightness.light ? green90 : green10,
     incorrect: brightness == Brightness.light ? red90 : red10,
