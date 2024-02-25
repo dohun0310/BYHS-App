@@ -76,6 +76,7 @@ class PageAppBar extends StatelessWidget implements PreferredSizeWidget {
           color: Theme.of(context).extension<AppExtension>()!.colors.text,
         ),
       ),
+      centerTitle: false,
       elevation: 0.0,
       scrolledUnderElevation: 0,
       backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
