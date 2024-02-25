@@ -26,13 +26,14 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
         ),
       ],
+      toolbarHeight: 64,
       flexibleSpace: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 16, top: 64),
+              padding: const EdgeInsets.only(left: 16, top: 64, bottom: 8),
               child: Text(
                 title,
                 style: ThemeTexts.title2Emphasized.copyWith(
