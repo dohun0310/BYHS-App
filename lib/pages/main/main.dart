@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:byhsapp/theme.dart';
 
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
@@ -14,32 +11,12 @@ import 'package:byhsapp/pages/weektimetable/main.dart';
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
-  Future<List<int?>> getStudentData() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final int? grade = prefs.getInt("grade");
-    final int? classNumber = prefs.getInt("classNumber");
-    return [grade, classNumber];
-  }
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MainAppBar(
-        rightIcon: const Icon(Icons.more_vert),
-        destinationPage: const SettingPage(),
-        title: FutureBuilder<List<int?>>(
-          future: getStudentData(),
-          builder: (context, snapshot) {
-            final int? grade = snapshot.data?[0];
-            final int? classNumber = snapshot.data?[1];
-            return Text(
-              "부용고등학교 ${grade ?? "null"}학년 ${classNumber ?? "null"}반",
-              style: ThemeTexts.title2Emphasized.copyWith(
-                color: Theme.of(context).extension<AppExtension>()!.colors.text,
-              ),
-            );
-          }
-        ),
+        rightIcon: Icon(Icons.more_vert),
+        destinationPage: SettingPage(),
         date: "1월 1일 월요일",
       ),
       body: SafeArea(
