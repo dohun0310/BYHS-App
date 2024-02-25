@@ -5,6 +5,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'dart:core';
 
+import 'package:byhsapp/theme.dart';
+
+import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/error.dart';
 import 'package:byhsapp/components/loading.dart';
 import 'package:byhsapp/pages/setting/user_data.dart';
@@ -20,17 +23,8 @@ class WeekTimeTablePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          '시간표',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: const Color(0xFFFFFFFF),
-        iconTheme: const IconThemeData(color: Colors.black),
+      appBar: const PageAppBar(
+        title: "시간표"
       ),
       body: SingleChildScrollView(
         child: Column(
