@@ -20,7 +20,6 @@ class StudentInfoPage extends StatefulWidget {
 class StudentInfoPageState extends State<StudentInfoPage> {
   Future<void> completeOnboarding() async {
     final prefs = await SharedPreferences.getInstance();
-    late bool onboardingComplete = prefs.getBool("onboardingComplete") ?? false;
     await prefs.setBool("onboardingComplete", true);
   }
 
@@ -55,9 +54,17 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                       const SizedBox(height: 36),
                       const Row(
                         children: [
-                          CustomTextField(fieldText: "학년"),
+                          CustomTextField(
+                            fieldText: "학년",
+                            minVal: 1,
+                            maxVal: 3
+                          ),
                           SizedBox(width: 16),
-                          CustomTextField(fieldText: "반"),
+                          CustomTextField(
+                            fieldText: "반",
+                            minVal: 1,
+                            maxVal: 12
+                          ),
                         ] 
                       ),
                     ],
