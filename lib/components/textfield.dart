@@ -22,10 +22,10 @@ class CustomTextFieldState extends State<CustomTextField> {
   void initState() {
     super.initState();
     focusNode = FocusNode();
-    focusNode.addListener(_handleFocusChange);
+    focusNode.addListener(handleFocusChange);
   }
 
-  void _handleFocusChange() {
+  void handleFocusChange() {
     if (focusNode.hasFocus != isFocused) {
       setState(() {
         isFocused = focusNode.hasFocus;
@@ -35,7 +35,7 @@ class CustomTextFieldState extends State<CustomTextField> {
 
   @override
   void dispose() {
-    focusNode.removeListener(_handleFocusChange);
+    focusNode.removeListener(handleFocusChange);
     focusNode.dispose();
     super.dispose();
   }
@@ -45,11 +45,29 @@ class CustomTextFieldState extends State<CustomTextField> {
     return Expanded(
       child: TextField(
         focusNode: focusNode,
+        cursorColor: Theme.of(context).extension<AppExtension>()!.colors.text,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(
           labelText: widget.fieldText,
+          labelStyle: TextStyle(
+            color: Theme.of(context).extension<AppExtension>()!.colors.text,
+          ),
           hintText: isFocused ? null : widget.fieldText,
-          border: OutlineInputBorder(),
+          hintStyle: ThemeTexts.calloutRegular.copyWith(
+            color: Theme.of(context).extension<AppExtension>()!.colors.text
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).extension<AppExtension>()!.colors.outline,
+              width: 1,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Theme.of(context).extension<AppExtension>()!.colors.text,
+              width: 2,
+            ),
+          ),
         ),
       )
     );
