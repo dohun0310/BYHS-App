@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:byhsapp/theme.dart';
+
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 
@@ -29,7 +31,7 @@ class MainPage extends StatelessWidget {
                   destinationPage: const MonthMealPage(),
                   child: Container(
                     padding: const EdgeInsets.all(14),
-                    child: const Column(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
@@ -37,26 +39,24 @@ class MainPage extends StatelessWidget {
                           children: [
                             Text(
                               "점심",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              )
+                              style: ThemeTexts.subheadlineRegular.copyWith(
+                                color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+                              ),
                             ),
                             Text(
                               "000.0kcal",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              )
+                              style: ThemeTexts.subheadlineRegular.copyWith(
+                                color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+                              ),
                             ),
                           ]
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)",
-                          style: TextStyle(
-                            fontSize: 14,
-                          )
+                          style: ThemeTexts.subheadlineRegular.copyWith(
+                            color: Theme.of(context).extension<AppExtension>()!.colors.text,
+                          ),
                         )
                       ]
                     )
@@ -76,22 +76,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "1",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "국어",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -102,22 +101,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "2",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "수학",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -128,22 +126,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child:Row(
                             children: [
                               Text(
                                 "3",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "영어",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -154,22 +151,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "4",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "화학I",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -180,22 +176,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "5",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "물리I",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -206,22 +201,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "6",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "지구과학I",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
@@ -232,22 +226,21 @@ class MainPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.grey[100],
+                            color: Theme.of(context).extension<AppExtension>()!.colors.container,
                           ),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Text(
                                 "7",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                                 )
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 "생명과학I",
-                                style: TextStyle(
-                                  fontSize: 14,
+                                style: ThemeTexts.subheadlineRegular.copyWith(
+                                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                                 )
                               ),
                             ]
