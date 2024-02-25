@@ -86,3 +86,68 @@ class MealContainer extends StatelessWidget {
     );
   }
 }
+
+class TimeTableContainer extends StatelessWidget {
+  const TimeTableContainer({
+    super.key,
+    required this.date,
+    required this.period,
+    required this.subject,
+  });
+
+  final String date;
+  final List period;
+  final List subject;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        DateContainer(date: date),
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Theme.of(context).extension<AppExtension>()!.colors.outline,
+                width: 1,
+              ),
+            ),
+          ),
+          child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: period.length,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(bottom: index == period.length - 1 ? 0 : 8),
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  color: Theme.of(context).extension<AppExtension>()!.colors.container,
+                ),
+                child: Row(
+                  children: [
+                    Text(
+                      period[index],
+                      style: ThemeTexts.subheadlineRegular.copyWith(
+                        color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      subject[index],
+                      style: ThemeTexts.subheadlineRegular.copyWith(
+                        color: Theme.of(context).extension<AppExtension>()!.colors.text,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
