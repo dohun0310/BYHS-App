@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/theme.dart';
 
-import 'package:byhsapp/pages/setting/main.dart';
-
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
@@ -37,9 +35,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(left: 16, top: 64),
               child: Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+                style: ThemeTexts.title2Emphasized.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
                 ),
               ),
             ),
@@ -47,10 +44,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               padding: const EdgeInsets.only(left: 16),
               child: Text(
                 date,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey,
+                style: ThemeTexts.calloutRegular.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                 ),
               ),
             ),
@@ -62,32 +57,4 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(130.0);
-}
-
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      backgroundColor: const Color(0xFFFFFFFF),
-      elevation: 0,
-      iconTheme: const IconThemeData(color: Colors.black),
-      actions: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingPage()));
-          },
-          borderRadius: BorderRadius.circular(32),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Icon(Icons.settings_outlined),
-          ),
-        ),
-      ],
-    );
-  }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
