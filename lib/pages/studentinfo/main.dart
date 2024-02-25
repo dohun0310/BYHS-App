@@ -54,11 +54,12 @@ class StudentInfoPage extends StatelessWidget {
                     child: FloatingButton(
                       icon: Icons.arrow_forward,
                       onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => const MainPage())
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(builder: (context) => const MainPage()),
+                          (Route<dynamic> route) => false,
                         );
                       },
-                    ),
+                    )
                   )
                 ],
               )
