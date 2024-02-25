@@ -6,11 +6,13 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
     required this.rightIcon,
+    required this.destinationPage,
     required this.title,
     required this.date,
   });
 
   final Widget rightIcon;
+  final Widget destinationPage;
   final FutureBuilder<List<int?>> title;
   final String date;
 
@@ -23,7 +25,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: rightIcon,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => destinationPage),
+            );
+          },
         ),
       ],
       toolbarHeight: 64,
