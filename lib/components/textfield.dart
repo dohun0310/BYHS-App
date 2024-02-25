@@ -4,22 +4,25 @@ import 'package:flutter/services.dart';
 import 'package:byhsapp/theme.dart';
 
 class CustomTextField extends StatefulWidget {
+  final String fieldText;
+  final int minVal;
+  final int maxVal;
+  final Function(String) onTextChanged;
+
   const CustomTextField({
     super.key,
     required this.fieldText,
     required this.minVal,
     required this.maxVal,
+    required this.onTextChanged,
   });
-
-  final String fieldText;
-  final int minVal;
-  final int maxVal;
 
   @override
   CustomTextFieldState createState() => CustomTextFieldState();
 }
 
 class CustomTextFieldState extends State<CustomTextField> {
+  late TextEditingController controller;
   late FocusNode focusNode;
   bool isFocused = false;
 
@@ -27,21 +30,25 @@ class CustomTextFieldState extends State<CustomTextField> {
   void initState() {
     super.initState();
     focusNode = FocusNode();
-    focusNode.addListener(handleFocusChange);
-  }
+    controller = TextEditingController();
 
-  void handleFocusChange() {
-    if (focusNode.hasFocus != isFocused) {
-      setState(() {
-        isFocused = focusNode.hasFocus;
-      });
-    }
+    focusNode.addListener(() {
+      if (focusNode.hasFocus != isFocused) {
+        setState(() {
+          isFocused = focusNode.hasFocus;
+        });
+      }
+    });
+
+    controller.addListener(() {
+      widget.onTextChanged(controller.text);
+    });
   }
 
   @override
   void dispose() {
-    focusNode.removeListener(handleFocusChange);
     focusNode.dispose();
+    controller.dispose();
     super.dispose();
   }
 
