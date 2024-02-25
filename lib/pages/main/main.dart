@@ -7,6 +7,7 @@ import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/container.dart';
 
+import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
 import 'package:byhsapp/pages/weektimetable/main.dart';
 
@@ -25,6 +26,7 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       appBar: MainAppBar(
         rightIcon: const Icon(Icons.more_vert),
+        destinationPage: const SettingPage(),
         title: FutureBuilder<List<int?>>(
           future: getStudentData(),
           builder: (context, snapshot) {
