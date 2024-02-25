@@ -16,6 +16,7 @@ class InfoPage extends StatelessWidget {
           alignment: AlignmentDirectional.center,
           padding: const EdgeInsets.only(left: 16, top: 20, right: 16, bottom: 16),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
