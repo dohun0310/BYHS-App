@@ -72,3 +72,52 @@ class InfoButton extends StatelessWidget {
     );
   }
 }
+
+class FloatingButton extends StatelessWidget {
+  const FloatingButton({
+    super.key,
+    this.title,
+    this.icon,
+    required this.onPressed,
+    this.extended = false,
+  });
+
+  final String? title;
+  final IconData? icon;
+  final void Function() onPressed;
+  final bool extended;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget? child;
+
+    if (icon != null) {
+      child = Icon(
+        icon,
+        size: 24,
+        color: Theme.of(context).extension<AppExtension>()!.colors.background
+      );
+    } else if (title != null) {
+      child = Text(
+        title!,
+        style: ThemeTexts.calloutEmphasized.copyWith(
+          color: Theme.of(context).extension<AppExtension>()!.colors.background
+        )
+      );
+    }
+
+    return SizedBox(
+      height: extended ? 55 : 56,
+      width: extended ? double.infinity : 56,
+      child: FloatingActionButton(
+        onPressed: onPressed,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
+        foregroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
+        backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.text,
+        child: child,
+      )
+    );
+  }
+}
