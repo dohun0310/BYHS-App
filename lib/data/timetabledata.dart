@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:byhsapp/data/studentdata.dart';
-import 'package:byhsapp/data/errordata.dart';
+import 'package:byhsapp/data/errorhandlingdata.dart';
 
 class TimeTable {
   TimeTable({
@@ -37,11 +37,11 @@ class TimeTable {
 
       return timeTables;
     } else if (response.statusCode == 404) {
-      return notFoundTimeList;
+      return NotFoundData(firstKey: "period", secondKey: "subject").notFoundList();
     } else if (response.statusCode == 500) {
-      return errorTimeList;
+      return ErrorData(firstKey: "period", secondKey: "subject").errorList();
     } else {
-      return errorTimeList;
+      return ErrorData(firstKey: "period", secondKey: "subject").errorList();
     }
   }
 }

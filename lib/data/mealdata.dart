@@ -32,11 +32,11 @@ class Meal {
 
       return meals;
     } else if (response.statusCode == 404) {
-      return notFoundList;
+      return NotFoundData(firstKey: "calorie", secondKey: "dish").notFoundList();
     } else if (response.statusCode == 500) {
-      return errorList;
+      return ErrorData(firstKey: "calorie", secondKey: "dish").errorList();
     } else {
-      return errorList;
+      return ErrorData(firstKey: "calorie", secondKey: "dish").errorList();
     }
   }
 }
