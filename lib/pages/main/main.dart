@@ -4,15 +4,40 @@ import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/container.dart';
 
+import 'package:byhsapp/data/todaymeal.dart';
+
 import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
 import 'package:byhsapp/pages/weektimetable/main.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  MainPageState createState() => MainPageState();
+}
+
+class MainPageState extends State<MainPage> {
+  String calorie = "";
+  String dish = "";
+
+  @override
+  void initState() {
+    super.initState();
+    getTodayMeal();
+  }
+
+  void getTodayMeal() async {
+    fetchTodayMeal().then((value) {
+      setState(() {
+        calorie = value[0]["details"]["calorie"];
+        dish = value[0]["details"]["dish"];
+      });
+    });
+  }
+
+  @override
+    Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(
         rightIcon: Icon(Icons.more_vert),
@@ -22,19 +47,19 @@ class MainPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top:10, left: 16, right: 16),
-            child: const Column(
+            child: Column(
               children: [
                 InfoButton(
                   titleIcon: Icons.restaurant,
                   title: "오늘의 급식",
-                  destinationPage: MonthMealPage(),
+                  destinationPage: const MonthMealPage(),
                   child: MealContainer(
-                    calorie: "104.1 kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)",
+                    calorie: calorie,
+                    dish: dish,
                     border: false
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 InfoButton(
                   titleIcon: Icons.today,
                   title: "시간표",
