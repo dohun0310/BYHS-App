@@ -163,7 +163,12 @@ class CustomPopupMenuButton extends StatelessWidget {
               return title.map((String choice) {
                 return PopupMenuItem<String>(
                   value: choice,
-                  child: Text(choice),
+                  child: Text(
+                    choice,
+                    style: ThemeTexts.subheadlineRegular.copyWith(
+                      color: Theme.of(context).extension<AppExtension>()!.colors.text,
+                    )
+                  )
                 );
               }).toList();
             },
