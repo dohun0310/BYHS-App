@@ -3,77 +3,57 @@ import 'package:flutter/material.dart';
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/container.dart';
 
-final now = DateTime.now();
+import 'package:byhsapp/data/mealdata.dart';
 
-class MonthMealPage extends StatelessWidget {
+class MonthMealPage extends StatefulWidget {
   const MonthMealPage({super.key});
 
   @override
+  MonthMealPageState createState() => MonthMealPageState();
+}
+
+class MonthMealPageState extends State<MonthMealPage> {
+  List<String> date = [];
+  List<String> calorie = [];
+  List<String> dish = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getMonthMeal();
+  }
+
+  void getMonthMeal() async {
+    final Meal meal = Meal(dateRange: "Month");
+    List<Map<String, dynamic>> monthMeals = await meal.fetchMeal();
+
+    setState(() {
+      for (var item in monthMeals) {
+        date.add(item["date"]);
+        calorie.add(item["details"]["calorie"]);
+        dish.add(item["details"]["dish"].replaceAll("<br/>", "\n"));
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: PageAppBar(
-        title: "급식"
-      ),
+    return Scaffold(
+      appBar: const PageAppBar(title: "급식"),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: List.generate(date.length, (index) => 
               Column(
                 children: [
-                  DateContainer(date: "1월 1일 월요일"),
+                  DateContainer(date: date[index]),
                   MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
+                    calorie: calorie[index],
+                    dish: dish[index],
                   ),
-                ],
-              ),
-              Column(
-                children: [
-                  DateContainer(date: "1월 2일 화요일"),
-                  MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  DateContainer(date: "1월 3일 수요일"),
-                  MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  DateContainer(date: "1월 4일 목요일"),
-                  MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  DateContainer(date: "1월 5일 금요일"),
-                  MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
-                  ),
-                ],
-              ),
-              Column(
-                children: [
-                  DateContainer(date: "1월 7일 월요일"),
-                  MealContainer(
-                    calorie: "000.0kcal",
-                    dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)"
-                  ),
-                ],
-              ),
-
-            ],
+                ]
+              )
+            )
           )
         )
       )
