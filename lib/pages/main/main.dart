@@ -19,10 +19,9 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MainAppBar(
-        rightIcon: const Icon(Icons.more_vert),
-        destinationPage: const SettingPage(),
-        date: "$month월 $day일 $weekday",
+      appBar: const MainAppBar(
+        rightIcon: Icon(Icons.more_vert),
+        destinationPage: SettingPage(),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -35,7 +34,7 @@ class MainPage extends StatelessWidget {
                   title: "오늘의 급식",
                   destinationPage: MonthMealPage(),
                   child: MealContainer(
-                    calorie: "000.0kcal",
+                    calorie: "104.1 kcal",
                     dish: "셀프스펨무스비\n잔치국수\n<국수고명>매콤애호박채볶음\n돈육고구마강정\n김치무침\n스틱단무지\n<음료>얼박(시원한여름보내세요)",
                     border: false
                   ),
