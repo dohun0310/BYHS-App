@@ -122,6 +122,35 @@ class FloatingButton extends StatelessWidget {
   }
 }
 
+class CustomPopupMenuButton extends StatelessWidget {
+  const CustomPopupMenuButton({
+    super.key,
+    required this.onSelected,
+    required this.title,
+    required this.icon,
+  });
+
+  final void Function(String) onSelected;
+  final List<String> title;
+  final Widget icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return PopupMenuButton<String>(
+      onSelected: onSelected,
+      itemBuilder: (BuildContext context) {
+        return title.map((String choice) {
+          return PopupMenuItem<String>(
+            value: choice,
+            child: Text(choice),
+          );
+        }).toList();
+      },
+      icon: icon,
+    );
+  }
+}
+
 class ListButton extends StatelessWidget {
   const ListButton({
     super.key,
