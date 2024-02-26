@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
@@ -8,10 +7,6 @@ import 'package:byhsapp/components/container.dart';
 import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
 import 'package:byhsapp/pages/weektimetable/main.dart';
-
-final month = DateFormat("M").format(DateTime.now());
-final day = DateFormat("d").format(DateTime.now());
-final weekday = DateFormat("EEEE", "ko").format(DateTime.now());
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
