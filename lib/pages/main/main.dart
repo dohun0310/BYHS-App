@@ -4,7 +4,9 @@ import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/container.dart';
 
+import 'package:byhsapp/data/studentdata.dart';
 import 'package:byhsapp/data/mealdata.dart';
+import 'package:byhsapp/data/timetabledata.dart';
 
 import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
@@ -18,13 +20,29 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageState extends State<MainPage> {
+  int grade = 0;
+  int classNumber = 0;
+
   String calorie = "";
   String dish = "";
+
+  List<String> periods = [];
+  List<String> subjects = [];
 
   @override
   void initState() {
     super.initState();
+    loadData();
+  }
+
+  void loadData() async {
+    await StudentData.instance.loadStudentData();
+    setState(() {
+      grade = StudentData.instance.grade!;
+      classNumber = StudentData.instance.classNumber!;
+    });
     getTodayMeal();
+    getTodayTimeTable();
   }
 
   void getTodayMeal() async {
@@ -37,12 +55,28 @@ class MainPageState extends State<MainPage> {
     });
   }
 
+  void getTodayTimeTable() async {
+    final timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
+    List<Map<String, dynamic>> todayTimeTables = await timeTable.fetchTimeTable();
+
+    setState(() {
+      for (var item in todayTimeTables[0]["details"]["period"]) {
+        periods.add(item);
+      }
+      for (var item in todayTimeTables[0]["details"]["subject"]) {
+        subjects.add(item);
+      }
+    });
+  }
+  
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MainAppBar(
-        rightIcon: Icon(Icons.more_vert),
-        destinationPage: SettingPage(),
+      appBar: MainAppBar(
+        rightIcon: const Icon(Icons.more_vert),
+        destinationPage: const SettingPage(),
+        grade: grade,
+        classNumber: classNumber,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -63,11 +97,11 @@ class MainPageState extends State<MainPage> {
                 const SizedBox(height: 16),
                 InfoButton(
                   titleIcon: Icons.today,
-                  title: "시간표",
-                  destinationPage: WeekTimeTablePage(),
+                  title: "오늘의 시간표",
+                  destinationPage: const WeekTimeTablePage(),
                   child: TimeTableContainer(
-                    period: ["1", "2", "3", "4", "5", "6"],
-                    subject: ["문학", "영어I", "수학I", "물리학I", "화학I", "지구과학I"],
+                    period: periods,
+                    subject: subjects,
                     border: false
                   ),
                 )
