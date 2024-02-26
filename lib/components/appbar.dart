@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:byhsapp/theme.dart';
 
 import 'package:byhsapp/data/datedata.dart';
-import 'package:byhsapp/data/studentdata.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
     super.key,
     required this.rightIcon,
     required this.destinationPage,
+    required this.grade,
+    required this.classNumber,
   });
 
   final Widget rightIcon;
   final Widget destinationPage;
+  final int grade;
+  final int classNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                 ],
                 icon: rightIcon,
-              ),
+              )
             );
           }
         )
@@ -68,16 +71,11 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 16, top: 64, bottom: 8),
-              child: FutureBuilder(
-                future: StudentData.instance.loadStudentData(),
-                builder: (context, snapshot) {
-                  return Text(
-                    "부용고등학교 ${StudentData.instance.grade}학년 ${StudentData.instance.classNumber}반",
-                    style: ThemeTexts.title2Emphasized.copyWith(
-                      color: Theme.of(context).extension<AppExtension>()!.colors.text,
-                    )
-                  );
-                }
+              child: Text(
+                "부용고등학교 $grade학년 $classNumber반",
+                style: ThemeTexts.title2Emphasized.copyWith(
+                  color: Theme.of(context).extension<AppExtension>()!.colors.text,
+                )
               )
             ),
             Padding(
@@ -86,12 +84,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 today,
                 style: ThemeTexts.calloutRegular.copyWith(
                   color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
-                ),
-              ),
+                )
+              )
             ),
-          ],
-        ),
-      ),
+          ]
+        )
+      )
     );
   }
 
