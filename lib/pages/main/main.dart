@@ -68,9 +68,38 @@ class MainPageState extends State<MainPage> {
       }
     });
   }
-  
+
+  Widget buildMealInfoButton() {
+    return InfoButton(
+      titleIcon: Icons.restaurant,
+      title: "오늘의 급식",
+      destinationPage: const MonthMealPage(),
+      child: MealContainer(
+        calorie: calorie,
+        dish: dish,
+        border: false
+      ),
+    );
+  }
+
+  Widget buildTimeTableInfoButton() {
+    return InfoButton(
+      titleIcon: Icons.today,
+      title: "오늘의 시간표",
+      destinationPage: const WeekTimeTablePage(),
+      child: TimeTableContainer(
+        period: periods,
+        subject: subjects,
+        border: false
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final isTablet = MediaQuery.of(context).size.shortestSide >= 600;
+
     return Scaffold(
       appBar: MainAppBar(
         rightIcon: const Icon(Icons.more_vert),
@@ -82,31 +111,26 @@ class MainPageState extends State<MainPage> {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top:10, left: 16, right: 16),
-            child: Column(
-              children: [
-                InfoButton(
-                  titleIcon: Icons.restaurant,
-                  title: "오늘의 급식",
-                  destinationPage: const MonthMealPage(),
-                  child: MealContainer(
-                    calorie: calorie,
-                    dish: dish,
-                    border: false
+            child: isLandscape && !isTablet
+              ? Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: buildMealInfoButton()
                   ),
-                ),
-                const SizedBox(height: 16),
-                InfoButton(
-                  titleIcon: Icons.today,
-                  title: "오늘의 시간표",
-                  destinationPage: const WeekTimeTablePage(),
-                  child: TimeTableContainer(
-                    period: periods,
-                    subject: subjects,
-                    border: false
-                  ),
-                )
-              ]
-            )
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: buildTimeTableInfoButton()
+                  )
+                ],
+              )
+              : Column(
+                children: [
+                  buildMealInfoButton(),
+                  const SizedBox(height: 16),
+                  buildTimeTableInfoButton(),
+                ],
+              )
           )
         )
       )
