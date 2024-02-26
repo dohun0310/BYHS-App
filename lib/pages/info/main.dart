@@ -19,6 +19,18 @@ class InfoPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Container(
+                width: 100,
+                height: 100,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/icon.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
               Text(
                 "부용고등학교",
                 style: ThemeTexts.title2Emphasized.copyWith(
