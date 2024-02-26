@@ -136,17 +136,41 @@ class CustomPopupMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopupMenuButton<String>(
-      onSelected: onSelected,
-      itemBuilder: (BuildContext context) {
-        return title.map((String choice) {
-          return PopupMenuItem<String>(
-            value: choice,
-            child: Text(choice),
-          );
-        }).toList();
-      },
-      icon: icon,
+    return Builder(
+      builder: (context) {
+        final ThemeData theme = Theme.of(context).copyWith(
+          colorScheme: ColorScheme(
+            brightness: Theme.of(context).brightness,
+            primary: Theme.of(context).extension<AppExtension>()!.colors.background,
+            onPrimary: Theme.of(context).extension<AppExtension>()!.colors.text,
+            secondary: Theme.of(context).extension<AppExtension>()!.colors.container,
+            onSecondary: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+            error: Theme.of(context).extension<AppExtension>()!.colors.red,
+            onError: Theme.of(context).extension<AppExtension>()!.colors.red,
+            background: Theme.of(context).extension<AppExtension>()!.colors.background,
+            onBackground: Theme.of(context).extension<AppExtension>()!.colors.text,
+            surface: Theme.of(context).extension<AppExtension>()!.colors.background,
+            onSurface: Theme.of(context).extension<AppExtension>()!.colors.text,
+          ),
+        );
+
+        return Theme(
+          data: theme,
+          child: PopupMenuButton<String>(
+            onSelected: onSelected,
+            tooltip: "",
+            itemBuilder: (BuildContext context) {
+              return title.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+            icon: icon,
+          )
+        );
+      }
     );
   }
 }
