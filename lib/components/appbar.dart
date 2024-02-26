@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/theme.dart';
 
+import 'package:byhsapp/data/datedata.dart';
 import 'package:byhsapp/data/studentdata.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -9,12 +10,10 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.rightIcon,
     required this.destinationPage,
-    required this.date,
   });
 
   final Widget rightIcon;
   final Widget destinationPage;
-  final String date;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +21,44 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0.0,
       scrolledUnderElevation: 0,
       backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
-      actions: [
-        IconButton(
-          icon: rightIcon,
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => destinationPage),
+      actions: <Widget>[
+        Builder(
+          builder: (context) {
+            return Theme(
+              data: Theme.of(context).copyWith(
+                colorScheme: Theme.of(context).colorScheme.copyWith(
+                  primary: Theme.of(context).extension<AppExtension>()!.colors.background,
+                  surface: Theme.of(context).extension<AppExtension>()!.colors.background,
+                  onSurface: Theme.of(context).extension<AppExtension>()!.colors.text,
+                  primaryContainer: Theme.of(context).extension<AppExtension>()!.colors.background,
+                ),
+              ),
+              child: PopupMenuButton<String>(
+                color: Theme.of(context).extension<AppExtension>()!.colors.background,
+                onSelected: (String result) {
+                  switch (result) {
+                    case "setting":
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => destinationPage));
+                      break;
+                    case "option2":
+                      break;
+                  }
+                },
+                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: "setting",
+                    child: Text("설정"),
+                  ),
+                  const PopupMenuItem<String>(
+                    value: "option2",
+                    child: Text("Option 2"),
+                  ),
+                ],
+                icon: rightIcon,
+              ),
             );
-          },
-        ),
+          }
+        )
       ],
       toolbarHeight: 64,
       flexibleSpace: SafeArea(
@@ -56,7 +83,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16),
               child: Text(
-                date,
+                today,
                 style: ThemeTexts.calloutRegular.copyWith(
                   color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                 ),
