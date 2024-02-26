@@ -9,7 +9,6 @@ import 'package:byhsapp/components/textfield.dart';
 
 import 'package:byhsapp/pages/main/main.dart';
 
-
 class StudentInfoPage extends StatefulWidget {
   const StudentInfoPage({super.key});
 
@@ -28,6 +27,13 @@ class StudentInfoPageState extends State<StudentInfoPage> {
     if (grade != null) await prefs.setInt("grade", grade!);
     if (classNumber != null) await prefs.setInt("classNumber", classNumber!);
     await prefs.setBool("onboardingComplete", true);
+
+    if (!mounted) return;
+
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const MainPage()),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
@@ -90,11 +96,7 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                       icon: Icons.arrow_forward,
                       onPressed: isButtonEnabled ? () async {
                         await saveData();
-                        Navigator.of(mounted as BuildContext).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (mounted) => const MainPage()),
-                          (Route<dynamic> route) => false,
-                        );
-                      } : null,
+                      } : null
                     )
                   )
                 )
