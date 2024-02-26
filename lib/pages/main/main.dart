@@ -4,7 +4,7 @@ import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/container.dart';
 
-import 'package:byhsapp/data/todaymeal.dart';
+import 'package:byhsapp/data/mealdata.dart';
 
 import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';
@@ -28,11 +28,12 @@ class MainPageState extends State<MainPage> {
   }
 
   void getTodayMeal() async {
-    fetchTodayMeal().then((value) {
-      setState(() {
-        calorie = value[0]["details"]["calorie"];
-        dish = value[0]["details"]["dish"];
-      });
+    final meal = Meal(dateRange: "Today");
+    List<Map<String, dynamic>> todayMeals = await meal.fetchMeal();
+
+    setState(() {
+      calorie = todayMeals[0]["details"]["calorie"];
+      dish = todayMeals[0]["details"]["dish"].replaceAll("<br/>", "\n");
     });
   }
 
