@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:byhsapp/data/errordata.dart';
+import 'package:byhsapp/data/errorhandlingdata.dart';
 
 class Meal {
   Meal({
