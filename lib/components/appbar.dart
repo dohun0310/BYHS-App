@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:byhsapp/theme.dart';
 
+import 'package:byhsapp/components/button.dart';
+
 import 'package:byhsapp/data/datedata.dart';
+
+launchInstagram() async {
+  launchUrl(Uri.parse("https://instagram.com/dohun0310"));
+}
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   const MainAppBar({
@@ -24,43 +31,22 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0.0,
       scrolledUnderElevation: 0,
       backgroundColor: Theme.of(context).extension<AppExtension>()!.colors.background,
-      actions: <Widget>[
-        Builder(
-          builder: (context) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: Theme.of(context).colorScheme.copyWith(
-                  primary: Theme.of(context).extension<AppExtension>()!.colors.background,
-                  surface: Theme.of(context).extension<AppExtension>()!.colors.background,
-                  onSurface: Theme.of(context).extension<AppExtension>()!.colors.text,
-                  primaryContainer: Theme.of(context).extension<AppExtension>()!.colors.background,
-                ),
-              ),
-              child: PopupMenuButton<String>(
-                color: Theme.of(context).extension<AppExtension>()!.colors.background,
-                onSelected: (String result) {
-                  switch (result) {
-                    case "setting":
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => destinationPage));
-                      break;
-                    case "option2":
-                      break;
-                  }
-                },
-                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                  const PopupMenuItem<String>(
-                    value: "setting",
-                    child: Text("설정"),
-                  ),
-                  const PopupMenuItem<String>(
-                    value: "option2",
-                    child: Text("Option 2"),
-                  ),
-                ],
-                icon: rightIcon,
-              )
-            );
-          }
+      actions: [
+        CustomPopupMenuButton(
+          onSelected: (String result) {
+            if (result == "설정") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => destinationPage),
+              );
+            }
+
+            if (result == "문의하기") {
+              launchInstagram();
+            }
+          },
+          title: const ["설정", "문의하기"],
+          icon: rightIcon
         )
       ],
       toolbarHeight: 64,
