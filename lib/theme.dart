@@ -648,6 +648,7 @@ class ThemeTexts {
     height: 41 / 34,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle largeTitleEmphasized = TextStyle(
@@ -655,6 +656,7 @@ class ThemeTexts {
     height: 41 / 34,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title1Regular = TextStyle(
@@ -662,6 +664,7 @@ class ThemeTexts {
     height: 34 / 28,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title1Emphasized = TextStyle(
@@ -669,6 +672,7 @@ class ThemeTexts {
     height: 34 / 28,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title2Regular = TextStyle(
@@ -676,6 +680,7 @@ class ThemeTexts {
     height: 30 / 24,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title2Emphasized = TextStyle(
@@ -683,6 +688,7 @@ class ThemeTexts {
     height: 30 / 24,
     fontWeight: FontWeight.w700,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title3Regular = TextStyle(
@@ -690,6 +696,7 @@ class ThemeTexts {
     height: 27 / 22,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle title3Emphasized = TextStyle(
@@ -697,6 +704,7 @@ class ThemeTexts {
     height: 27 / 22,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle headlineRegular = TextStyle(
@@ -704,6 +712,7 @@ class ThemeTexts {
     height: 23 / 18,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle headlineItalic = TextStyle(
@@ -712,6 +721,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle bodyRegular = TextStyle(
@@ -719,6 +729,7 @@ class ThemeTexts {
     height: 22 / 17,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle bodyEmphasized = TextStyle(
@@ -726,6 +737,7 @@ class ThemeTexts {
     height: 22 / 17,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle bodyItalic = TextStyle(
@@ -734,6 +746,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle bodyEmphasizedItalic = TextStyle(
@@ -742,6 +755,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle calloutRegular = TextStyle(
@@ -749,6 +763,7 @@ class ThemeTexts {
     height: 21 / 16,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle calloutEmphasized = TextStyle(
@@ -756,6 +771,7 @@ class ThemeTexts {
     height: 21 / 16,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle calloutItalic = TextStyle(
@@ -764,6 +780,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle calloutEmphasizedItalic = TextStyle(
@@ -772,6 +789,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle subheadlineRegular = TextStyle(
@@ -779,6 +797,7 @@ class ThemeTexts {
     height: 19 / 14,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle subheadlineEmphasized = TextStyle(
@@ -786,6 +805,7 @@ class ThemeTexts {
     height: 19 / 14,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle subheadlineItalic = TextStyle(
@@ -794,6 +814,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle subheadlineEmphasizedItalic = TextStyle(
@@ -802,6 +823,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle footnoteRegular = TextStyle(
@@ -809,6 +831,7 @@ class ThemeTexts {
     height: 18 / 13,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle footnoteEmphasized = TextStyle(
@@ -816,6 +839,7 @@ class ThemeTexts {
     height: 18 / 13,
     fontWeight: FontWeight.w600,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle footnoteItalic = TextStyle(
@@ -824,6 +848,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle footnoteEmphasizedItalic = TextStyle(
@@ -832,6 +857,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption1Regular = TextStyle(
@@ -839,6 +865,7 @@ class ThemeTexts {
     height: 16 / 12,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption1Emphasized = TextStyle(
@@ -846,6 +873,7 @@ class ThemeTexts {
     height: 16 / 12,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption1Italic = TextStyle(
@@ -854,6 +882,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption1EmphasizedItalic = TextStyle(
@@ -862,6 +891,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption2Regular = TextStyle(
@@ -869,6 +899,7 @@ class ThemeTexts {
     height: 13 / 11,
     fontWeight: FontWeight.w400,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption2Emphasized = TextStyle(
@@ -876,6 +907,7 @@ class ThemeTexts {
     height: 13 / 11,
     fontWeight: FontWeight.w500,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption2Italic = TextStyle(
@@ -884,6 +916,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 
   static const TextStyle caption2EmphasizedItalic = TextStyle(
@@ -892,6 +925,7 @@ class ThemeTexts {
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.italic,
     letterSpacing: -0.4,
+    fontFamily: "NotoSansKR",
   );
 }
 
