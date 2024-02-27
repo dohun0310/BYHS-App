@@ -91,16 +91,19 @@ class TimeTableContainer extends StatelessWidget {
     super.key,
     required this.period,
     required this.subject,
+    this.height,
     this.border = true,
   });
 
   final List period;
   final List subject;
   final bool border;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         border: Border(
@@ -138,10 +141,10 @@ class TimeTableContainer extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
+            )
           );
-        },
-      ),
+        }
+      )
     );
   }
 }
