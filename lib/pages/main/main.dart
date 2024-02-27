@@ -111,17 +111,13 @@ class MainPageState extends State<MainPage> {
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.only(top:10, left: 16, right: 16),
-            child: isLandscape && !isTablet
+            child: isLandscape || isTablet
               ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: buildMealInfoButton()
-                  ),
+                  Expanded(child: buildMealInfoButton()),
                   const SizedBox(width: 16),
-                  Expanded(
-                    child: buildTimeTableInfoButton()
-                  )
+                  Expanded(child: buildTimeTableInfoButton())
                 ],
               )
               : Column(
