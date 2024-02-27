@@ -30,11 +30,13 @@ class MealContainer extends StatelessWidget {
     super.key,
     required this.calorie,
     required this.dish,
+    this.height,
     this.border = true,
   });
 
   final String calorie;
   final String dish;
+  final double? height;
   final bool border;
 
   @override
@@ -42,6 +44,7 @@ class MealContainer extends StatelessWidget {
     return Column(
       children: [
         Container(
+          height: height,
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             border: Border(
