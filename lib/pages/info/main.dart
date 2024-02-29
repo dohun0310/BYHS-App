@@ -46,7 +46,7 @@ class InfoPage extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                "버전 1.0.0",
+                "버전 3.0.0",
                 style: ThemeTexts.calloutRegular.copyWith(
                   color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
                 ),
