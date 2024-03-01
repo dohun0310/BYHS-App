@@ -5,8 +5,8 @@ import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/container.dart';
 
 import 'package:byhsapp/data/studentdata.dart';
-import 'package:byhsapp/data/mealdata.dart';
-import 'package:byhsapp/data/timetabledata.dart';
+import 'package:byhsapp/services/fetchmeal.dart';
+import 'package:byhsapp/services/fetchtimetable.dart';
 
 import 'package:byhsapp/pages/setting/main.dart';
 import 'package:byhsapp/pages/monthmeal/main.dart';

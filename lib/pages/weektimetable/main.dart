@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/components/layout.dart';
 
-import 'package:byhsapp/data/timetabledata.dart';
+import 'package:byhsapp/services/fetchtimetable.dart';
 
 class WeekTimeTablePage extends StatefulWidget {
   const WeekTimeTablePage({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/components/layout.dart';
 
-import 'package:byhsapp/data/mealdata.dart';
+import 'package:byhsapp/services/fetchmeal.dart';
 
 class MonthMealPage extends StatefulWidget {
   const MonthMealPage({super.key});
