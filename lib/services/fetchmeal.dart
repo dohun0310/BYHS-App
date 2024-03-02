@@ -6,17 +6,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:byhsapp/data/errorhandlingdata.dart';
 
 class Meal {
-  Meal({
-    required this.dateRange,
-  });
-
-  final String dateRange;
-
   static const String mealKey = "cachedMeal";
   static const String mealExpiryKey = "cachedMealExpiry";
 
   Future<List<Map<String, dynamic>>> fetchMeal() async {
-    final url = Uri.parse("${dotenv.get("API_URL")}/get${dateRange}Meal");
+    final url = Uri.parse("${dotenv.get("API_URL")}/getMonthMeal");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
