@@ -54,6 +54,12 @@ class TimeTable {
     await prefs.setInt(timeTableExpiryKey, expiryDate.millisecondsSinceEpoch);
   }
 
+  Future<void> clearTimeTableData() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(timeTableKey);
+    await prefs.remove(timeTableExpiryKey);
+  }
+
   Future<dynamic> getTimeTableData() async {
     final prefs = await SharedPreferences.getInstance();
     final expiryTimestamp = prefs.getInt(timeTableExpiryKey);
