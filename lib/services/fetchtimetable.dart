@@ -8,12 +8,10 @@ import 'package:byhsapp/data/errorhandlingdata.dart';
 
 class TimeTable {
   TimeTable({
-    required this.dateRange,
     this.grade,
     this.classNumber,
   });
 
-  final String dateRange;
   final int? grade;
   final int? classNumber;
 
@@ -21,7 +19,7 @@ class TimeTable {
   static const String timeTableExpiryKey = "cachedTimeTableExpiry";
 
   Future<List<Map<String, dynamic>>> fetchTimeTable() async {
-    final url = Uri.parse("${dotenv.get("API_URL")}/get${dateRange}TimeTable/${grade ?? StudentData.instance.grade}/${classNumber ?? StudentData.instance.classNumber}");
+    final url = Uri.parse("${dotenv.get("API_URL")}/getWeekTimeTable/${grade ?? StudentData.instance.grade}/${classNumber ?? StudentData.instance.classNumber}");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
