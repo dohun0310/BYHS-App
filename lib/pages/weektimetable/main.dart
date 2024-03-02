@@ -23,8 +23,8 @@ class WeekTimeTablePageState extends State<WeekTimeTablePage> {
   }
 
   void getWeekTimeTable() async {
-    final timeTable = TimeTable(dateRange: "Week");
-    List<Map<String, dynamic>> weekTimeTables = await timeTable.fetchTimeTable();
+    final timeTable = TimeTable();
+    List<dynamic> weekTimeTables = await timeTable.getTimeTableData();
 
     setState(() {
       for (var item in weekTimeTables) {
