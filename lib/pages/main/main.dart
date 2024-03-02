@@ -42,7 +42,7 @@ class MainPageState extends State<MainPage> {
       grade = StudentData.instance.grade!;
       classNumber = StudentData.instance.classNumber!;
     });
-    Meal meal = Meal(dateRange: "Today");
+    Meal meal = Meal();
     var mealData = await meal.getMealData();
     setState(() {
       calorie = mealData[0]["details"]["calorie"];
