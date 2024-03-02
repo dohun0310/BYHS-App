@@ -25,6 +25,50 @@ class DateContainer extends StatelessWidget {
   }
 }
 
+class TitleContainer extends StatelessWidget {
+  const TitleContainer({
+    super.key,
+    required this.titleIcon,
+    required this.title,
+    this.text = "더보기"
+  });
+
+  final IconData titleIcon;
+  final String title;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Icon(
+              titleIcon,
+              size: 20,
+              color: Theme.of(context).extension<AppExtension>()!.colors.text,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: ThemeTexts.subheadlineEmphasized.copyWith(
+                color: Theme.of(context).extension<AppExtension>()!.colors.text,
+              ),
+            ),
+          ],
+        ),
+        Text(
+          text,
+          style: ThemeTexts.subheadlineRegular.copyWith(
+            color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
+          ),
+        )
+      ],
+    );
+  }
+}
+
 class MealContainer extends StatelessWidget {
   const MealContainer({
     super.key,
