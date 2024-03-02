@@ -7,6 +7,8 @@ import 'package:byhsapp/components/appbar.dart';
 import 'package:byhsapp/components/button.dart';
 import 'package:byhsapp/components/textfield.dart';
 
+import 'package:byhsapp/services/fetchtimetable.dart';
+
 import 'package:byhsapp/pages/main/main.dart';
 
 class StudentInfoPage extends StatefulWidget {
@@ -96,6 +98,7 @@ class StudentInfoPageState extends State<StudentInfoPage> {
                       icon: Icons.arrow_forward,
                       onPressed: isButtonEnabled ? () async {
                         await saveData();
+                        await TimeTable().clearTimeTableData();
                       } : null
                     )
                   )
