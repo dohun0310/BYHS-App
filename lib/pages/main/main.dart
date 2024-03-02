@@ -48,7 +48,7 @@ class MainPageState extends State<MainPage> {
       calorie = mealData[0]["details"]["calorie"];
       dish = mealData[0]["details"]["dish"].replaceAll("<br/>", "\n");
     });
-    TimeTable timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
+    TimeTable timeTable = TimeTable(grade: grade, classNumber: classNumber);
     var timeTableData = await timeTable.getTimeTableData();
     setState(() {
       for (var item in timeTableData[0]["details"]["period"]) {
