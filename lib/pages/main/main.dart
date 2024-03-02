@@ -25,7 +25,7 @@ class MainPageState extends State<MainPage> {
   int classNumber = 0;
 
   String calorie = "";
-  String dish = "";
+  List<String> dish = [];
 
   List<String> periods = [];
   List<String> subjects = [];
@@ -46,7 +46,7 @@ class MainPageState extends State<MainPage> {
     var mealData = await meal.getMealData();
     setState(() {
       calorie = mealData[0]["details"]["calorie"];
-      dish = mealData[0]["details"]["dish"].replaceAll("<br/>", "\n");
+      dish = mealData[0]["details"]["dish"].split("<br/>");
     });
     TimeTable timeTable = TimeTable(grade: grade, classNumber: classNumber);
     var timeTableData = await timeTable.getTimeTableData();
@@ -67,7 +67,7 @@ class MainPageState extends State<MainPage> {
       destinationPage: const MonthMealPage(),
       child: MealContainer(
         calorie: calorie,
-        dish: dish,
+        dish: dish.join('\n'),
         border: false
       ),
     );
