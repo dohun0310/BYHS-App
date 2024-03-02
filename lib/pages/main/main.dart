@@ -42,33 +42,47 @@ class MainPageState extends State<MainPage> {
       grade = StudentData.instance.grade!;
       classNumber = StudentData.instance.classNumber!;
     });
-    getTodayMeal();
-    getTodayTimeTable();
-  }
-
-  void getTodayMeal() async {
-    final meal = Meal(dateRange: "Today");
-    List<Map<String, dynamic>> todayMeals = await meal.fetchMeal();
-
+    Meal meal = Meal(dateRange: "Today");
+    var mealData = await meal.getMealData();
     setState(() {
-      calorie = todayMeals[0]["details"]["calorie"];
-      dish = todayMeals[0]["details"]["dish"].replaceAll("<br/>", "\n");
+      calorie = mealData[0]["details"]["calorie"];
+      dish = mealData[0]["details"]["dish"].replaceAll("<br/>", "\n");
     });
-  }
-
-  void getTodayTimeTable() async {
-    final timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
-    List<Map<String, dynamic>> todayTimeTables = await timeTable.fetchTimeTable();
-
+    TimeTable timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
+    var timeTableData = await timeTable.getTimeTableData();
     setState(() {
-      for (var item in todayTimeTables[0]["details"]["period"]) {
+      for (var item in timeTableData[0]["details"]["period"]) {
         periods.add(item);
       }
-      for (var item in todayTimeTables[0]["details"]["subject"]) {
+      for (var item in timeTableData[0]["details"]["subject"]) {
         subjects.add(item);
       }
     });
   }
+
+  // void getTodayMeal() async {
+  //   final meal = Meal(dateRange: "Today");
+  //   List<Map<String, dynamic>> todayMeals = await meal.fetchMeal();
+
+  //   setState(() {
+  //     calorie = todayMeals[0]["details"]["calorie"];
+  //     dish = todayMeals[0]["details"]["dish"].replaceAll("<br/>", "\n");
+  //   });
+  // }
+
+  // void getTodayTimeTable() async {
+  //   final timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
+  //   List<Map<String, dynamic>> todayTimeTables = await timeTable.fetchTimeTable();
+
+  //   setState(() {
+  //     for (var item in todayTimeTables[0]["details"]["period"]) {
+  //       periods.add(item);
+  //     }
+  //     for (var item in todayTimeTables[0]["details"]["subject"]) {
+  //       subjects.add(item);
+  //     }
+  //   });
+  // }
 
   Widget buildMealInfoButton() {
     return InfoButton(
