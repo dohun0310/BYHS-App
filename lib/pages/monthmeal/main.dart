@@ -23,8 +23,8 @@ class MonthMealPageState extends State<MonthMealPage> {
   }
 
   void getMonthMeal() async {
-    final Meal meal = Meal(dateRange: "Month");
-    List<Map<String, dynamic>> monthMeals = await meal.fetchMeal();
+    Meal meal = Meal();
+    List<dynamic> monthMeals = await meal.getMealData();
 
     setState(() {
       for (var item in monthMeals) {
