@@ -140,18 +140,20 @@ class TimeTableContainer extends StatelessWidget {
     required this.subject,
     this.height,
     this.border = true,
+    this.padding = true,
   });
 
   final List period;
   final List subject;
-  final bool border;
   final double? height;
+  final bool border;
+  final bool padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      padding: const EdgeInsets.all(14),
+      padding: padding ? const EdgeInsets.all(14) : null,
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
