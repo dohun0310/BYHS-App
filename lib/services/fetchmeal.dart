@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:byhsapp/data/errorhandlingdata.dart';
 
@@ -10,6 +11,9 @@ class Meal {
   });
 
   final String dateRange;
+
+  static const String mealKey = "cachedMeal";
+  static const String mealExpiryKey = "cachedMealExpiry";
 
   Future<List<Map<String, dynamic>>> fetchMeal() async {
     final url = Uri.parse("${dotenv.get("API_URL")}/get${dateRange}Meal");
@@ -37,6 +41,28 @@ class Meal {
       return ErrorData(firstKey: "calorie", secondKey: "dish").errorList();
     } else {
       return ErrorData(firstKey: "calorie", secondKey: "dish").errorList();
+    }
+  }
+
+  Future<void> cacheMealData(dynamic mealData) async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiryDate = DateTime.now().add(const Duration(days: 1));
+    await prefs.setString(mealKey, json.encode(mealData));
+    await prefs.setInt(mealExpiryKey, expiryDate.millisecondsSinceEpoch);
+  }
+
+  Future<dynamic> getMealData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiryTimestamp = prefs.getInt(mealExpiryKey);
+    final now = DateTime.now();
+
+    if (expiryTimestamp != null && now.millisecondsSinceEpoch < expiryTimestamp) {
+      final cachedData = prefs.getString(mealKey);
+      return json.decode(cachedData!);
+    } else {
+      final mealData = await fetchMeal();
+      await cacheMealData(mealData);
+      return mealData;
     }
   }
 }
