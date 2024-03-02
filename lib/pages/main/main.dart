@@ -60,30 +60,6 @@ class MainPageState extends State<MainPage> {
     });
   }
 
-  // void getTodayMeal() async {
-  //   final meal = Meal(dateRange: "Today");
-  //   List<Map<String, dynamic>> todayMeals = await meal.fetchMeal();
-
-  //   setState(() {
-  //     calorie = todayMeals[0]["details"]["calorie"];
-  //     dish = todayMeals[0]["details"]["dish"].replaceAll("<br/>", "\n");
-  //   });
-  // }
-
-  // void getTodayTimeTable() async {
-  //   final timeTable = TimeTable(dateRange: "Today", grade: grade, classNumber: classNumber);
-  //   List<Map<String, dynamic>> todayTimeTables = await timeTable.fetchTimeTable();
-
-  //   setState(() {
-  //     for (var item in todayTimeTables[0]["details"]["period"]) {
-  //       periods.add(item);
-  //     }
-  //     for (var item in todayTimeTables[0]["details"]["subject"]) {
-  //       subjects.add(item);
-  //     }
-  //   });
-  // }
-
   Widget buildMealInfoButton() {
     return InfoButton(
       titleIcon: Icons.restaurant,
