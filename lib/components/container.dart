@@ -76,12 +76,14 @@ class MealContainer extends StatelessWidget {
     required this.dish,
     this.height,
     this.border = true,
+    this.padding = true,
   });
 
   final String calorie;
   final String dish;
   final double? height;
   final bool border;
+  final bool padding;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +91,7 @@ class MealContainer extends StatelessWidget {
       children: [
         Container(
           height: height,
-          padding: const EdgeInsets.all(14),
+          padding: padding ? const EdgeInsets.all(14) : null,
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
