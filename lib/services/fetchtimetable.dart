@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:byhsapp/data/studentdata.dart';
 import 'package:byhsapp/data/errorhandlingdata.dart';
@@ -15,6 +16,9 @@ class TimeTable {
   final String dateRange;
   final int? grade;
   final int? classNumber;
+
+  static const String timeTableKey = "cachedTimeTable";
+  static const String timeTableExpiryKey = "cachedTimeTableExpiry";
 
   Future<List<Map<String, dynamic>>> fetchTimeTable() async {
     final url = Uri.parse("${dotenv.get("API_URL")}/get${dateRange}TimeTable/${grade ?? StudentData.instance.grade}/${classNumber ?? StudentData.instance.classNumber}");
@@ -42,6 +46,28 @@ class TimeTable {
       return ErrorData(firstKey: "period", secondKey: "subject").errorList();
     } else {
       return ErrorData(firstKey: "period", secondKey: "subject").errorList();
+    }
+  }
+
+  Future<void> cacheTimeTableData(dynamic timeTableData) async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiryDate = DateTime.now().add(const Duration(days: 1));
+    await prefs.setString(timeTableKey, json.encode(timeTableData));
+    await prefs.setInt(timeTableExpiryKey, expiryDate.millisecondsSinceEpoch);
+  }
+
+  Future<dynamic> getTimeTableData() async {
+    final prefs = await SharedPreferences.getInstance();
+    final expiryTimestamp = prefs.getInt(timeTableExpiryKey);
+    final now = DateTime.now();
+
+    if (expiryTimestamp != null && now.millisecondsSinceEpoch < expiryTimestamp) {
+      final cachedData = prefs.getString(timeTableKey);
+      return json.decode(cachedData!);
+    } else {
+      final timeTableData = await fetchTimeTable();
+      await cacheTimeTableData(timeTableData);
+      return timeTableData;
     }
   }
 }
