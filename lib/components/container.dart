@@ -75,15 +75,13 @@ class MealContainer extends StatelessWidget {
     required this.calorie,
     required this.dish,
     this.height,
-    this.border = true,
-    this.padding = true,
+    this.border = true
   });
 
   final String calorie;
   final String dish;
   final double? height;
   final bool border;
-  final bool padding;
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +89,7 @@ class MealContainer extends StatelessWidget {
       children: [
         Container(
           height: height,
-          padding: padding ? const EdgeInsets.all(14) : null,
+          padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
@@ -141,21 +139,19 @@ class TimeTableContainer extends StatelessWidget {
     required this.period,
     required this.subject,
     this.height,
-    this.border = true,
-    this.padding = true,
+    this.border = true
   });
 
   final List period;
   final List subject;
   final double? height;
   final bool border;
-  final bool padding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      padding: padding ? const EdgeInsets.all(14) : null,
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -196,28 +192,6 @@ class TimeTableContainer extends StatelessWidget {
           );
         }
       )
-    );
-  }
-}
-
-class LargeWidgetContainer extends StatelessWidget {
-  const LargeWidgetContainer({
-    super.key,
-    required this.child,
-  });
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      width: 338,
-      height: 354,
-      decoration: BoxDecoration(
-        color: Theme.of(context).extension<AppExtension>()!.colors.background,
-      ),
-      child: child,
     );
   }
 }
