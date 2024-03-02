@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:byhsapp/theme.dart';
 
+import 'package:byhsapp/components/container.dart';
+
 class InfoButton extends StatelessWidget {
   const InfoButton({
     super.key,
@@ -37,33 +39,10 @@ class InfoButton extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(14),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        titleIcon,
-                        size: 20,
-                        color: Theme.of(context).extension<AppExtension>()!.colors.text,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        title,
-                        style: ThemeTexts.subheadlineEmphasized.copyWith(
-                          color: Theme.of(context).extension<AppExtension>()!.colors.text,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    "더보기",
-                    style: ThemeTexts.subheadlineRegular.copyWith(
-                      color: Theme.of(context).extension<AppExtension>()!.colors.textSecondary,
-                    ),
-                  )
-                ],
-              )
+              child: TitleContainer(
+                titleIcon: titleIcon,
+                title: title,
+              ),
             ),
             child,
           ],
