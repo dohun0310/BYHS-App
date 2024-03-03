@@ -44,11 +44,10 @@ struct SmallTimeTableWidgetEntryView : View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
                 HStack {
-                    Text("10")
+                    Text(entryDateFormatted)
                         .font(Font.custom("Noto Sans KR", size: 48).weight(.bold))
                         .multilineTextAlignment(.leading)
-                        .lineSpacing(42)
-                        .frame(width: 57.0, height: 42.0)
+                        .frame(width: nil, height: 42.0)
                         .foregroundColor(Color(red: 0.07, green: 0.07, blue: 0.07))
                     Spacer()
                 }
