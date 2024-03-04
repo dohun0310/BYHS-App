@@ -60,17 +60,17 @@ struct SmallTimeTableWidgetEntryView : View {
             Spacer()
             HStack(alignment: .center, spacing: 8) {
                 Text("언어와 매체")
-                .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                .multilineTextAlignment(.center)
-                .foregroundColor(Color(red: 0.07, green: 0.07, blue: 0.07))
-                .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .frame(height: 20.0)
+                    .foregroundColor(Color(red: 0.07, green: 0.07, blue: 0.07))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
             }
             .padding(8)
             .frame(width: 126, height: 34, alignment: .leading)
             .background(Color(red: 0.99, green: 0.99, blue: 0.99))
             .cornerRadius(8)
         }
-        .padding(0)
     }
     var entryDateFormatted: String {
         let formatter = DateFormatter()
