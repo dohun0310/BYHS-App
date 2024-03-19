@@ -4,11 +4,8 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.LargeTimeTableWidget</string>
-		<string>group.MediumMealWidget</string>
-		<string>group.MediumTimeTableWidget</string>
-		<string>group.SmallTimeTableWidget</string>
-		<string>group.LargeMealWidget</string>
+		<string>group.widgetdatameal</string>
+		<string>group.widgetdatatimetable</string>
 	</array>
 </dict>
 </plist>
