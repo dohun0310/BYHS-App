@@ -149,6 +149,7 @@ struct MealEntryView : View {
                 HStack {
                     HStack(spacing: 8) {
                         let restaurant = colorScheme == .dark ? "restaurant_white" : "restaurant_black"
+                        Image(restaurant)
                         Text("오늘의 급식")
                             .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
                             .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
