@@ -149,7 +149,6 @@ struct MealEntryView : View {
                 HStack {
                     HStack(spacing: 8) {
                         let restaurant = colorScheme == .dark ? "restaurant_white" : "restaurant_black"
-                        Image(restaurant)
                         Text("오늘의 급식")
                             .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
                             .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
@@ -203,7 +202,14 @@ struct Meal: Widget {
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            MealEntryView(entry: entry)
+            if #available(iOS 17.0, *) {
+                MealEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                MealEntryView(entry: entry)
+                    .padding()
+                    .background()
+            }
         }
         .configurationDisplayName("급식")
         .description("오늘의 급식 정보를 표시하는 위젯이에요.")
