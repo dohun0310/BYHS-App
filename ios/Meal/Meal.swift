@@ -232,7 +232,7 @@ struct Meal: Widget {
             }
         }
         .configurationDisplayName("급식")
-        .description("오늘의 급식 정보를 표시하는 위젯이에요.")
+        .description("오늘의 급식 메뉴를 표시하는 위젯이에요.")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
 }
