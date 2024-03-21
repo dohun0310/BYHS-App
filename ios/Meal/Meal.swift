@@ -59,23 +59,23 @@ struct Provider: TimelineProvider {
         }
         task.resume()
     }
+}
 
-    struct MealResponse: Codable {
-        struct ResultData: Codable {
-            let date: String
-            let dish: [String]
-            let calorie: [String]
-        }
-        let RESULT_CODE: Int
-        let RESULT_MSG: String
-        let RESULT_DATA: ResultData
+struct MealResponse: Codable {
+    struct ResultData: Codable {
+        let date: String
+        let dish: [String]
+        let calorie: [String]
     }
+    let RESULT_CODE: Int
+    let RESULT_MSG: String
+    let RESULT_DATA: ResultData
+}
 
-    struct MealData {
-        let date: Date
-        let meals: [String]
-        let calorie: String
-    }
+struct MealData {
+    let date: Date
+    let meals: [String]
+    let calorie: String
 }
 
 struct SimpleEntry: TimelineEntry {
@@ -84,112 +84,131 @@ struct SimpleEntry: TimelineEntry {
     let calorie: String
 }
 
-struct MealEntryView : View {
+struct MealEntryView: View {
     var entry: Provider.Entry
 
     @Environment(\.widgetFamily) var widgetFamily
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
-        switch widgetFamily {
-        case .systemMedium:
-            VStack(spacing: 8) {
-                HStack {
-                    HStack(spacing: 8) {
-                        let restaurant = colorScheme == .dark ? "restaurant_white" : "restaurant_black"
-                        Image(restaurant)
-                        Text("오늘의 급식")
-                            .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
-                    }
-                    Spacer()
-                    Text("점심 \(entry.calorie)")
-                        .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                        .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
-                }
-
-                HStack(alignment: .top, spacing: 8) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        ForEach(0..<min(entry.meals.count, 4), id: \.self) { index in
-                            Text(entry.meals[index])
-                                .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                                .lineSpacing(22)
-                                .foregroundColor(colorScheme == .dark ? Color(red: 0.94, green: 0.94, blue: 0.94) : Color(red: 0.19, green: 0.19, blue: 0.19))
-                                .lineLimit(1)
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-
-                    VStack(alignment: .leading, spacing: 4) {
-                        if entry.meals.count > 4 {
-                            ForEach(4..<min(entry.meals.count, 8), id: \.self) { index in
-                                Text(entry.meals[index])
-                                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                                    .lineSpacing(22)
-                                    .foregroundColor(colorScheme == .dark ? Color(red: 0.94, green: 0.94, blue: 0.94) : Color(red: 0.19, green: 0.19, blue: 0.19))
-                                    .lineLimit(1)
-                            }
-
-                            if entry.meals.count > 8 {
-                                Text("\(entry.meals.count - 7)개 더보기")
-                                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                                    .lineSpacing(22)
-                                    .foregroundColor(colorScheme == .dark ? Color(red: 0.94, green: 0.94, blue: 0.94) : Color(red: 0.19, green: 0.19, blue: 0.19))
-                                    .opacity(0.50)
-                                    .lineLimit(1)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity)
-                }
+        Group {
+            if widgetFamily == .systemMedium {
+                mediumWidgetView
+            } else if widgetFamily == .systemLarge {
+                largeWidgetView
             }
-            
-        case .systemLarge:
-            VStack(spacing: 8) {
-                HStack {
-                    HStack(spacing: 8) {
-                        let restaurant = colorScheme == .dark ? "restaurant_white" : "restaurant_black"
-                        Image(restaurant)
-                        Text("오늘의 급식")
-                            .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
-                    }
-                    Spacer()
-                    Text(formatDate(entry.date))
-                        .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                        .foregroundColor(Color(red: 0.47, green: 0.47, blue: 0.47))
-                }
+        }
+    }
 
-                VStack(spacing: 16) {
-                    HStack(alignment: .top, spacing: 8) {
-                        Text("점심")
-                            .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                            .lineSpacing(22)
-                            .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
-                        Spacer()
-                        Text("\(entry.calorie)")
-                            .font(Font.custom("Noto Sans KR", size: 14))
-                            .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
-                    }
-                    
-                    VStack(alignment: .leading) {
-                        ForEach(entry.meals, id: \.self) { meal in
-                            Text(meal)
-                                .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
-                                .lineSpacing(22)
-                                .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.19, green: 0.19, blue: 0.19))
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                Spacer()
+    private var mediumWidgetView: some View {
+        VStack(spacing: 8) {
+            headerView
+            mealListView()
+        }
+    }
+
+    private var largeWidgetView: some View {
+        VStack(spacing: 8) {
+            headerView
+            VStack(spacing: 16) {
+                calorieView
+                mealListView()
             }
+            Spacer()
+        }
+    }
 
-        default:
-            Text("")
+    private var headerView: some View {
+        HStack {
+            Image(colorScheme == .dark ? "restaurant_white" : "restaurant_black")
+            Text("오늘의 급식")
+                .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
+                .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
+            Spacer()
+            if widgetFamily == .systemMedium {
+                Text("점심 \(entry.calorie)")
+                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                    .lineSpacing(22)
+                    .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
+            } else {
+                Text(formatDate(entry.date))
+                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                    .foregroundColor(Color(red: 0.47, green: 0.47, blue: 0.47))
+            }
         }
     }
     
+    private func mealListView() -> some View {
+        Group {
+            if widgetFamily == .systemMedium {
+                mediumLayout
+            } else {
+                largeLayout
+            }
+        }
+    }
+    
+    private var mediumLayout: some View {
+        HStack(alignment: .top, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(0..<min(entry.meals.count, 4), id: \.self) { index in
+                    Text(entry.meals[index])
+                        .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                        .lineSpacing(22)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.19, green: 0.19, blue: 0.19))
+                        .lineLimit(1)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            VStack(alignment: .leading, spacing: 4) {
+                ForEach(4..<min(entry.meals.count, 8), id: \.self) { index in
+                    Text(entry.meals[index])
+                        .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                        .lineSpacing(22)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.19, green: 0.19, blue: 0.19))
+                        .lineLimit(1)
+                }
+
+                if entry.meals.count > 8 {
+                    Text("\(entry.meals.count - 8)개 더보기")
+                        .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                        .lineSpacing(22)
+                        .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.19, green: 0.19, blue: 0.19))
+                        .opacity(0.50)
+                        .lineLimit(1)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    private var largeLayout: some View {
+        VStack(alignment: .leading) {
+            ForEach(entry.meals, id: \.self) { meal in
+                Text(meal)
+                    .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                    .lineSpacing(22)
+                    .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.19, green: 0.19, blue: 0.19))
+                    .lineLimit(1)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private var calorieView: some View {
+        HStack(alignment: .top, spacing: 8) {
+            Text("점심")
+                .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
+                .lineSpacing(22)
+                .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
+            Spacer()
+            Text("\(entry.calorie)")
+                .font(Font.custom("Noto Sans KR", size: 14))
+                .foregroundColor(colorScheme == .dark ? Color(red: 0.72, green: 0.72, blue: 0.72) : Color(red: 0.47, green: 0.47, blue: 0.47))
+        }
+    }
+
     func formatDate(_ date: Date) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "M월 d일 E요일"
@@ -216,10 +235,4 @@ struct Meal: Widget {
         .description("오늘의 급식 정보를 표시하는 위젯이에요.")
         .supportedFamilies([.systemMedium, .systemLarge])
     }
-}
-
-struct MealData {
-    let date: Date
-    let meals: [String]
-    let calorie: String
 }
