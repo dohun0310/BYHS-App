@@ -49,9 +49,9 @@ class TimeTable {
 
   Future<void> cacheTimeTableData(dynamic timeTableData) async {
     final prefs = await SharedPreferences.getInstance();
-    final expiryDate = DateTime.now().add(const Duration(days: 1));
+    final expiryTerm = DateTime.now().add(const Duration(hours: 3));
     await prefs.setString(timeTableKey, json.encode(timeTableData));
-    await prefs.setInt(timeTableExpiryKey, expiryDate.millisecondsSinceEpoch);
+    await prefs.setInt(timeTableExpiryKey, expiryTerm.millisecondsSinceEpoch);
   }
 
   Future<void> clearTimeTableData() async {

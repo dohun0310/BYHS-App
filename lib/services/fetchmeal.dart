@@ -40,9 +40,9 @@ class Meal {
 
   Future<void> cacheMealData(dynamic mealData) async {
     final prefs = await SharedPreferences.getInstance();
-    final expiryDate = DateTime.now().add(const Duration(days: 1));
+    final expiryTerm = DateTime.now().add(const Duration(hours: 3));
     await prefs.setString(mealKey, json.encode(mealData));
-    await prefs.setInt(mealExpiryKey, expiryDate.millisecondsSinceEpoch);
+    await prefs.setInt(mealExpiryKey, expiryTerm.millisecondsSinceEpoch);
   }
 
   Future<dynamic> getMealData() async {
