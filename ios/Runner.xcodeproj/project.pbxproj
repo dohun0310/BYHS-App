@@ -16,6 +16,15 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		B507C7F42BAFF86D004460F1 /* NotoSansKR-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C52B94ECE000C73B12 /* NotoSansKR-ExtraBold.ttf */; };
+		B507C7F52BAFF86D004460F1 /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C82B94ECE000C73B12 /* NotoSansKR-Bold.ttf */; };
+		B507C7F62BAFF86D004460F1 /* NotoSansKR-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3CA2B94ECE000C73B12 /* NotoSansKR-Black.ttf */; };
+		B507C7F72BAFF86D004460F1 /* NotoSansKR-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C42B94ECE000C73B12 /* NotoSansKR-Thin.ttf */; };
+		B507C7F82BAFF86D004460F1 /* NotoSansKR-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C22B94ECE000C73B12 /* NotoSansKR-ExtraLight.ttf */; };
+		B507C7F92BAFF86D004460F1 /* NotoSansKR-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C92B94ECE000C73B12 /* NotoSansKR-SemiBold.ttf */; };
+		B507C7FA2BAFF86D004460F1 /* NotoSansKR-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C32B94ECE000C73B12 /* NotoSansKR-Regular.ttf */; };
+		B507C7FB2BAFF86D004460F1 /* NotoSansKR-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C62B94ECE000C73B12 /* NotoSansKR-Light.ttf */; };
+		B507C7FC2BAFF86D004460F1 /* NotoSansKR-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5F9B3C72B94ECE000C73B12 /* NotoSansKR-Medium.ttf */; };
 		B5D54ECF2BAB3B1500CC579E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		B5D54ED52BAB3F9000CC579E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F9B3772B94C31B00C73B12 /* WidgetKit.framework */; };
 		B5D54ED62BAB3F9000CC579E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F9B3792B94C31B00C73B12 /* SwiftUI.framework */; };
@@ -121,6 +130,8 @@
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A73271E0765EAA90BAF7E2D0 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		B5145EA32BAFEED400700935 /* TimeTableExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeTableExtension.entitlements; sourceTree = "<group>"; };
+		B5145EA42BAFF01400700935 /* MealExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MealExtension.entitlements; sourceTree = "<group>"; };
 		B5D54ED42BAB3F9000CC579E /* TimeTableExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TimeTableExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5D54ED82BAB3F9000CC579E /* TimeTableBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableBundle.swift; sourceTree = "<group>"; };
 		B5D54EDA2BAB3F9000CC579E /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
@@ -219,6 +230,8 @@
 		97C146E51CF9000F007C117D = {
 			isa = PBXGroup;
 			children = (
+				B5145EA42BAFF01400700935 /* MealExtension.entitlements */,
+				B5145EA32BAFEED400700935 /* TimeTableExtension.entitlements */,
 				B5F9B3C12B94ECB700C73B12 /* Fonts */,
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
@@ -468,6 +481,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B507C7F42BAFF86D004460F1 /* NotoSansKR-ExtraBold.ttf in Resources */,
+				B507C7F52BAFF86D004460F1 /* NotoSansKR-Bold.ttf in Resources */,
+				B507C7F62BAFF86D004460F1 /* NotoSansKR-Black.ttf in Resources */,
+				B507C7F72BAFF86D004460F1 /* NotoSansKR-Thin.ttf in Resources */,
+				B507C7F82BAFF86D004460F1 /* NotoSansKR-ExtraLight.ttf in Resources */,
+				B507C7F92BAFF86D004460F1 /* NotoSansKR-SemiBold.ttf in Resources */,
+				B507C7FA2BAFF86D004460F1 /* NotoSansKR-Regular.ttf in Resources */,
+				B507C7FB2BAFF86D004460F1 /* NotoSansKR-Light.ttf in Resources */,
+				B507C7FC2BAFF86D004460F1 /* NotoSansKR-Medium.ttf in Resources */,
 				B5D54EDD2BAB3F9200CC579E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -961,6 +983,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TimeTableExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;
@@ -1003,6 +1026,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TimeTableExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;
@@ -1042,6 +1066,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = TimeTableExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;
@@ -1081,6 +1106,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MealExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;
@@ -1123,6 +1149,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MealExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;
@@ -1162,6 +1189,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = MealExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = PLRG28X2S4;

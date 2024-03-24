@@ -51,7 +51,7 @@ struct Provider: TimelineProvider {
                 }
                                 
                 let date = Date()
-                let meals = mealResponse.RESULT_DATA.dish.joined(separator: "\n").components(separatedBy: "\n")
+                let meals = mealResponse.RESULT_DATA.dish.joined(separator: "\n").components(separatedBy: "<br/>")
                 let calorie = mealResponse.RESULT_DATA.calorie.joined()
 
                 completion(MealData(date: date, meals: meals, calorie: calorie))
@@ -121,7 +121,7 @@ struct MealEntryView: View {
     }
 
     private var headerView: some View {
-        HStack {
+        HStack (alignment: .top) {
             Image(colorScheme == .dark ? "restaurant_white" : "restaurant_black")
             Text("오늘의 급식")
                 .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
@@ -220,7 +220,7 @@ struct MealEntryView: View {
 }
 
 struct Meal: Widget {
-    let kind: String = "MealWidget"
+    let kind: String = "Meal"
     
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
