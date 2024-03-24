@@ -23,15 +23,44 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         fetchTimeTableData { timeTableData in
             let entries = [SimpleEntry(date: timeTableData.date, period: timeTableData.period, subject: timeTableData.subject)]
-            
+
+            let now = Date()
             let calendar = Calendar.current
-            let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date())!
-            let nextMidnight = calendar.startOfDay(for: tomorrow)
+
+            let updateTimes = [
+                (hour: 0, minute: 0),
+                (hour: 9, minute: 20),
+                (hour: 10, minute: 20),
+                (hour: 11, minute: 20),
+                (hour: 12, minute: 20),
+                (hour: 14, minute: 0),
+                (hour: 15, minute: 0),
+            ]
+
+            var nextUpdateTime = Date.distantFuture
+            for updateTime in updateTimes {
+                var dateComponents = DateComponents()
+                dateComponents.hour = updateTime.hour
+                dateComponents.minute = updateTime.minute
+                
+                let potentialNextUpdateTime = calendar.nextDate(after: now, matching: dateComponents, matchingPolicy: .nextTime)!
+                if potentialNextUpdateTime < nextUpdateTime {
+                    nextUpdateTime = potentialNextUpdateTime
+                }
+            }
+
+            if nextUpdateTime == .distantFuture {
+                var nextDayComponents = DateComponents()
+                nextDayComponents.day = 1
+                let startOfNextDay = calendar.startOfDay(for: calendar.date(byAdding: nextDayComponents, to: now)!)
+                nextUpdateTime = calendar.date(byAdding: .minute, value: 20, to: startOfNextDay)!
+            }
             
-            let timeline = Timeline(entries: entries, policy: .after(nextMidnight))
+            let timeline = Timeline(entries: entries, policy: .after(nextUpdateTime))
             completion(timeline)
         }
     }
+
 
     func fetchTimeTableData(completion: @escaping (TimeTableData) -> ()) {
         let prefs = UserDefaults(suiteName: "group.studentinfo")
@@ -136,7 +165,7 @@ struct TimeTableEntryView : View {
                     .frame(width: nil, height: 42.0)
                     .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
                 Spacer()
-                Text("\(entry.period[0])교시")
+                Text("\(entry.period[timeIndex()])교시")
                     .font(Font.custom("Noto Sans KR", size: 16).weight(.medium))
                     .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
                     .opacity(0.50)
@@ -164,13 +193,14 @@ struct TimeTableEntryView : View {
             }
         }
     }
-    
+
     private var smallLayout: some View {
         HStack(alignment: .center, spacing: 8) {
-            Text("\(entry.subject[0])")
+            Text("\(entry.subject[timeIndex()])")
                 .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
                 .multilineTextAlignment(.center)
                 .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
+                .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
         }
         .padding(8)
@@ -518,6 +548,32 @@ struct TimeTableEntryView : View {
             formatter.dateFormat = "M월 d일 E요일"
             formatter.locale = Locale(identifier: "ko_KR")
             return formatter.string(from: date)
+        }
+    }
+    
+    func timeIndex() -> Int {
+        let now = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        let minute = calendar.component(.minute, from: now)
+
+        switch (hour, minute) {
+        case (0...8, _), (9, 0...20):
+            return 0
+        case (9, 21...), (10, 0...20):
+            return 1
+        case (10, 21...), (11, 0...20):
+            return 2
+        case (11, 21...), (12, 0...20):
+            return 3
+        case (12, 21...), (13...13, _), (14, 0):
+            return 4
+        case (14, 1...59), (15, 0):
+            return 5
+        case (15, 1...), (16...23, _):
+            return 6
+        default:
+            return 6
         }
     }
 }
