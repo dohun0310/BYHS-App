@@ -15,6 +15,11 @@ class StudentData {
     classNumber = prefs.getInt("classNumber");
 
     await HomeWidget.updateWidget(
+      name: "MealProvider",
+      iOSName: "Meal",
+    );
+
+    await HomeWidget.updateWidget(
       name: "TimeTableProvider",
       iOSName: "TimeTable",
     );
