@@ -121,7 +121,7 @@ struct MealEntryView: View {
     }
 
     private var headerView: some View {
-        HStack (alignment: .top) {
+        HStack(alignment: .top) {
             Image(colorScheme == .dark ? "restaurant_white" : "restaurant_black")
             Text("오늘의 급식")
                 .font(Font.custom("Noto Sans KR", size: 14).weight(.bold))
