@@ -37,7 +37,6 @@ struct Provider: TimelineProvider {
         let prefs = UserDefaults(suiteName: "group.studentinfo")
         let api_url = prefs?.string(forKey: "api_url") ?? ""
         let url = URL(string: "\(api_url)/getTodayMeal")!
-        print(url)
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             guard let data = data, error == nil else {
                 completion(MealData(date: Date(), meals: ["정보를 가져오지 못했어요.", "인터넷 연결 상태에", "문제가 없다면,", "개발자에게 문의해주세요."], calorie: "000.0 kcal"))
