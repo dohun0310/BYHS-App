@@ -165,7 +165,7 @@ struct TimeTableEntryView : View {
                     .frame(width: nil, height: 42.0)
                     .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
                 Spacer()
-                Text("\(entry.period[timeIndex()])교시")
+                Text("\(entry.period[timeIndex(arrayCount: entry.period.count)])교시")
                     .font(Font.custom("Noto Sans KR", size: 16).weight(.medium))
                     .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
                     .opacity(0.50)
@@ -196,7 +196,7 @@ struct TimeTableEntryView : View {
 
     private var smallLayout: some View {
         HStack(alignment: .center, spacing: 8) {
-            Text("\(entry.subject[timeIndex()])")
+            Text("\(entry.subject[timeIndex(arrayCount: entry.period.count)])")
                 .font(Font.custom("Noto Sans KR", size: 14).weight(.medium))
                 .multilineTextAlignment(.center)
                 .foregroundColor(colorScheme == .dark ? Color.white : Color(red: 0.07, green: 0.07, blue: 0.07))
@@ -551,30 +551,34 @@ struct TimeTableEntryView : View {
         }
     }
     
-    func timeIndex() -> Int {
+    func timeIndex(arrayCount: Int) -> Int {
         let now = Date()
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: now)
         let minute = calendar.component(.minute, from: now)
 
+        var index: Int
+
         switch (hour, minute) {
         case (0...8, _), (9, 0...20):
-            return 0
+            index = 0
         case (9, 21...), (10, 0...20):
-            return 1
+            index = 1
         case (10, 21...), (11, 0...20):
-            return 2
+            index = 2
         case (11, 21...), (12, 0...20):
-            return 3
+            index = 3
         case (12, 21...), (13...13, _), (14, 0):
-            return 4
+            index = 4
         case (14, 1...59), (15, 0):
-            return 5
+            index = 5
         case (15, 1...), (16...23, _):
-            return 6
+            index = 6
         default:
-            return 6
+            index = 6
         }
+
+        return index % arrayCount
     }
 }
 
