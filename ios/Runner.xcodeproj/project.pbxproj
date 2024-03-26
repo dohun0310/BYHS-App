@@ -11,18 +11,19 @@
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
+		3F1AF2E9F8EE430255962C10 /* Pods_MealExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06D4878CE10DE87EBAADEE99 /* Pods_MealExtension.framework */; };
 		6557D009859723EFD80E362A /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CC30D6A8131801D01268D28 /* Pods_Runner.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		AF91E14A19DFB5345AC7459D /* Pods_TimeTableExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5107F6F60867C8566A25EB3 /* Pods_TimeTableExtension.framework */; };
 		B50B40BE2BB1A9D100E66C8A /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B12BB1A9D100E66C8A /* NotoSansKR-Bold.ttf */; };
 		B50B40BF2BB1A9D100E66C8A /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B12BB1A9D100E66C8A /* NotoSansKR-Bold.ttf */; };
 		B50B40CA2BB1A9D100E66C8A /* NotoSansKR-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B52BB1A9D100E66C8A /* NotoSansKR-Medium.ttf */; };
 		B50B40CB2BB1A9D100E66C8A /* NotoSansKR-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B52BB1A9D100E66C8A /* NotoSansKR-Medium.ttf */; };
 		B525E0C62BB274A00046F43C /* NotoSansKR-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B12BB1A9D100E66C8A /* NotoSansKR-Bold.ttf */; };
 		B525E0C72BB274A00046F43C /* NotoSansKR-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B50B40B52BB1A9D100E66C8A /* NotoSansKR-Medium.ttf */; };
-		B5D54ECF2BAB3B1500CC579E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		B5D54ED52BAB3F9000CC579E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F9B3772B94C31B00C73B12 /* WidgetKit.framework */; };
 		B5D54ED62BAB3F9000CC579E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F9B3792B94C31B00C73B12 /* SwiftUI.framework */; };
 		B5D54ED92BAB3F9000CC579E /* TimeTableBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5D54ED82BAB3F9000CC579E /* TimeTableBundle.swift */; };
@@ -88,9 +89,12 @@
 
 /* Begin PBXFileReference section */
 		02B3DC281B941677C82A0775 /* Pods-RunnerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.release.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.release.xcconfig"; sourceTree = "<group>"; };
+		06D4878CE10DE87EBAADEE99 /* Pods_MealExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MealExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CC30D6A8131801D01268D28 /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0CDD6203C8EE33F365087825 /* Pods-MealExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealExtension.release.xcconfig"; path = "Target Support Files/Pods-MealExtension/Pods-MealExtension.release.xcconfig"; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		2F066893C847FFEF3DB4A861 /* Pods-TimeTableExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTableExtension.profile.xcconfig"; path = "Target Support Files/Pods-TimeTableExtension/Pods-TimeTableExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
 		331C8081294A63A400263BE5 /* RunnerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunnerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35369800AAF380725A55C4ED /* Pods-RunnerTests.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RunnerTests.profile.xcconfig"; path = "Target Support Files/Pods-RunnerTests/Pods-RunnerTests.profile.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6F6DF2DE5B1CE06DB59CE5E /* Pods-MealExtension.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealExtension.profile.xcconfig"; path = "Target Support Files/Pods-MealExtension/Pods-MealExtension.profile.xcconfig"; sourceTree = "<group>"; };
 		B50B40B12BB1A9D100E66C8A /* NotoSansKR-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.ttf"; sourceTree = "<group>"; };
 		B50B40B52BB1A9D100E66C8A /* NotoSansKR-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.ttf"; sourceTree = "<group>"; };
 		B5145EA32BAFEED400700935 /* TimeTableExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TimeTableExtension.entitlements; sourceTree = "<group>"; };
@@ -126,6 +131,10 @@
 		B5F9B3712B94BAD600C73B12 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		B5F9B3772B94C31B00C73B12 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = /System/Library/Frameworks/WidgetKit.framework; sourceTree = "<absolute>"; };
 		B5F9B3792B94C31B00C73B12 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = /System/Library/Frameworks/SwiftUI.framework; sourceTree = "<absolute>"; };
+		C1C853B58E1A0D5AE1E5EC8E /* Pods-MealExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MealExtension.debug.xcconfig"; path = "Target Support Files/Pods-MealExtension/Pods-MealExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		E8B97581CB0D56C17FFCF376 /* Pods-TimeTableExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTableExtension.debug.xcconfig"; path = "Target Support Files/Pods-TimeTableExtension/Pods-TimeTableExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		F5107F6F60867C8566A25EB3 /* Pods_TimeTableExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimeTableExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F77DE55FA5448C92CBA0A786 /* Pods-TimeTableExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TimeTableExtension.release.xcconfig"; path = "Target Support Files/Pods-TimeTableExtension/Pods-TimeTableExtension.release.xcconfig"; sourceTree = "<group>"; };
 		FE1DC12563EABA9038D94D38 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -144,6 +153,7 @@
 			files = (
 				B5D54ED62BAB3F9000CC579E /* SwiftUI.framework in Frameworks */,
 				B5D54ED52BAB3F9000CC579E /* WidgetKit.framework in Frameworks */,
+				AF91E14A19DFB5345AC7459D /* Pods_TimeTableExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,6 +163,7 @@
 			files = (
 				B5F4FC9F2BA9836500B04688 /* SwiftUI.framework in Frameworks */,
 				B5F4FC9E2BA9836500B04688 /* WidgetKit.framework in Frameworks */,
+				3F1AF2E9F8EE430255962C10 /* Pods_MealExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +195,12 @@
 				40506A6087D250485C7B7CE9 /* Pods-RunnerTests.debug.xcconfig */,
 				02B3DC281B941677C82A0775 /* Pods-RunnerTests.release.xcconfig */,
 				35369800AAF380725A55C4ED /* Pods-RunnerTests.profile.xcconfig */,
+				C1C853B58E1A0D5AE1E5EC8E /* Pods-MealExtension.debug.xcconfig */,
+				0CDD6203C8EE33F365087825 /* Pods-MealExtension.release.xcconfig */,
+				A6F6DF2DE5B1CE06DB59CE5E /* Pods-MealExtension.profile.xcconfig */,
+				E8B97581CB0D56C17FFCF376 /* Pods-TimeTableExtension.debug.xcconfig */,
+				F77DE55FA5448C92CBA0A786 /* Pods-TimeTableExtension.release.xcconfig */,
+				2F066893C847FFEF3DB4A861 /* Pods-TimeTableExtension.profile.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -281,6 +298,8 @@
 				B5F9B3792B94C31B00C73B12 /* SwiftUI.framework */,
 				0CC30D6A8131801D01268D28 /* Pods_Runner.framework */,
 				45A26D9BF6FEA6564FD398D0 /* Pods_RunnerTests.framework */,
+				06D4878CE10DE87EBAADEE99 /* Pods_MealExtension.framework */,
+				F5107F6F60867C8566A25EB3 /* Pods_TimeTableExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -312,13 +331,13 @@
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
 				B2B2F1C7A8BA7820E71F0D4A /* [CP] Check Pods Manifest.lock */,
-				943501DDC7AF3C3DD31DE471 /* [CP] Embed Pods Frameworks */,
-				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
+				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				B5F9B38D2B94C31C00C73B12 /* Embed Foundation Extensions */,
+				943501DDC7AF3C3DD31DE471 /* [CP] Embed Pods Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 			);
 			buildRules = (
@@ -336,6 +355,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5D54EE22BAB3F9200CC579E /* Build configuration list for PBXNativeTarget "TimeTableExtension" */;
 			buildPhases = (
+				B5A5E5E42BB2993600B0C384 /* [CP] Check Pods Manifest.lock */,
 				B5D54ED02BAB3F9000CC579E /* Sources */,
 				B5D54ED12BAB3F9000CC579E /* Frameworks */,
 				B5D54ED22BAB3F9000CC579E /* Resources */,
@@ -353,6 +373,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5F4FCAB2BA9836600B04688 /* Build configuration list for PBXNativeTarget "MealExtension" */;
 			buildPhases = (
+				B5A5E5E32BB298DE00B0C384 /* [CP] Check Pods Manifest.lock */,
 				B5F4FC992BA9836500B04688 /* Sources */,
 				B5F4FC9A2BA9836500B04688 /* Frameworks */,
 				B5F4FC9B2BA9836500B04688 /* Resources */,
@@ -450,7 +471,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B50B40CA2BB1A9D100E66C8A /* NotoSansKR-Medium.ttf in Resources */,
-				B5D54ECF2BAB3B1500CC579E /* Assets.xcassets in Resources */,
 				B5F4FCA62BA9836600B04688 /* Assets.xcassets in Resources */,
 				B50B40BE2BB1A9D100E66C8A /* NotoSansKR-Bold.ttf in Resources */,
 			);
@@ -505,7 +525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 		B2B2F1C7A8BA7820E71F0D4A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -523,6 +543,50 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Runner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5A5E5E32BB298DE00B0C384 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MealExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5A5E5E42BB2993600B0C384 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TimeTableExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -947,7 +1011,7 @@
 				INFOPLIST_FILE = TimeTable/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimeTable;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -991,7 +1055,7 @@
 				INFOPLIST_FILE = TimeTable/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimeTable;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1032,7 +1096,7 @@
 				INFOPLIST_FILE = TimeTable/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TimeTable;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1073,7 +1137,7 @@
 				INFOPLIST_FILE = Meal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Meal;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1117,7 +1181,7 @@
 				INFOPLIST_FILE = Meal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Meal;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1158,7 +1222,7 @@
 				INFOPLIST_FILE = Meal/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Meal;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
